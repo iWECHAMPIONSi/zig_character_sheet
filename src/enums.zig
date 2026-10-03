@@ -1,0 +1,84 @@
+pub const Skill = enum {
+    acrobatics,
+    animal_handling,
+    arcana,
+    athletics,
+    deception,
+    history,
+    insight,
+    intimidation,
+    investigation,
+    medicine,
+    nature,
+    perception,
+    performance,
+    persuasion,
+    religion,
+    sleight_of_hand,
+    stealth,
+    survival,
+};
+
+pub const Ability = enum {
+    strength,
+    dexterity,
+    constitution,
+    intelligence,
+    wisdom,
+    charisma,
+};
+
+pub fn convertScoreToMod(score: u8) i8 {
+    const score_mod: i8 = @intCast(score);
+    return @divFloor(score_mod, 2) - 5;
+}
+
+pub fn getAbilityFromSkill(skill: Skill) Ability {
+    return switch (skill) {
+        .acrobatics => Ability.dexterity,
+        .animal_handling => Ability.wisdom,
+        .arcana => Ability.intelligence,
+        .athletics => Ability.strength,
+        .deception => Ability.charisma,
+        .history => Ability.intelligence,
+        .insight => Ability.wisdom,
+        .intimidation => Ability.charisma,
+        .investigation => Ability.intelligence,
+        .medicine => Ability.wisdom,
+        .nature => Ability.intelligence,
+        .perception => Ability.wisdom,
+        .performance => Ability.charisma,
+        .persuasion => Ability.charisma,
+        .religion => Ability.intelligence,
+        .sleight_of_hand => Ability.dexterity,
+        .stealth => Ability.dexterity,
+        .survival => Ability.wisdom,
+    };
+}
+
+pub const Alignment = enum {
+    lawful_good,
+    neutral_good,
+    chaotic_good,
+
+    lawful_neutral,
+    neutral_neutral,
+    chaotic_neutral,
+
+    lawful_evil,
+    neutral_evil,
+    chaotic_evil,
+};
+
+// ================= WEAPONS ===============
+
+pub const WeaponCategory = enum {
+    simple,
+    martial,
+};
+
+pub const WeaponType = enum {
+    bludgeoning,
+    piercing,
+    slashing,
+};
