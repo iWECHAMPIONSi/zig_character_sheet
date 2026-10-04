@@ -82,3 +82,34 @@ pub const WeaponType = enum {
     piercing,
     slashing,
 };
+
+// =================== ITEMS ===================
+
+pub const ItemType = enum {
+    weapon,
+    item,
+    container,
+    armor,
+    shield,
+    quiver,
+    fluid_container,
+    ammo,
+    tool,
+    small_container,
+};
+
+pub const ToolType = enum {
+    artisans,
+    gaming_set,
+    instrument,
+    none,
+};
+
+// =================== ARMOR =====================
+
+pub const ArmorCategory = enum {
+    light,
+    medium,
+    heavy,
+    shield,
+};
