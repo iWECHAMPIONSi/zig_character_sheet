@@ -1,4 +1,6 @@
 const enums = @import("enums.zig");
+const std = @import("std");
+const hash = std.hash.Wyhash.hash;
 const errors = @import("errors.zig");
 const StdErr = errors.StdErr;
 const dice = @import("dice.zig");
@@ -29,6 +31,7 @@ pub const WeaponProperties = struct {
 
 pub const Weapon = struct {
     name: []const u8,
+    hash: u64,
     weapon_category: enums.WeaponCategory,
     weapon_weight: f32,
     properties: WeaponProperties,
@@ -36,9 +39,17 @@ pub const Weapon = struct {
     dice_roll: ?Roll,
     const Self = @This();
 
-    fn compInit(weapon_name: []const u8, category: enums.WeaponCategory, weight: f32, properties: WeaponProperties, damage: ?enums.WeaponType, dice_roll: ?Roll) Self {
+    fn compInit(
+        comptime weapon_name: []const u8,
+        comptime category: enums.WeaponCategory,
+        comptime weight: f32,
+        comptime properties: WeaponProperties,
+        comptime damage: ?enums.WeaponType,
+        comptime dice_roll: ?Roll,
+    ) Self {
         return .{
             .name = weapon_name,
+            .hash = hash(0, name),
             .weapon_category = category,
             .weapon_weight = weight,
             .properties = properties,
@@ -52,11 +63,24 @@ pub const Weapon = struct {
         }
         return .{
             .name = weapon_name,
+            .hash = hash(0, name),
             .weapon_category = category,
             .weapon_weight = weight,
             .properties = properties,
             .damage_type = damage,
             .dice_roll = dice_roll,
+        };
+    }
+
+    pub fn clone(self: *Self) Self {
+        return Self{
+            .name = self.name,
+            .hash = self.hash,
+            .weapon_category = self.weapon_category,
+            .weapon_weight = self.weapon_weight,
+            .properties = self.properties,
+            .damage_type = self.damage_type,
+            .dice_roll = self.dice_roll,
         };
     }
 
