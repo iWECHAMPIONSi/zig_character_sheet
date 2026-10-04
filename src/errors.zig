@@ -3,4 +3,5 @@ pub const StdErr = error{
     MemoryAllocationFailed,
     InvalidStateReached,
     InvalidFnCall,
+    RuntimeFnCalledAtComptime,
 };

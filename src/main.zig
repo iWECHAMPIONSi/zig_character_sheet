@@ -1,7 +1,6 @@
 const std = @import("std");
 const dice = @import("dice.zig");
 const Dice = dice.Dice;
-const DiceSet = dice.DiceSet;
 const Roll = dice.Roll;
 const Io = std.Io;
 const weapons = @import("weapons.zig");
@@ -23,18 +22,15 @@ pub fn main(init: std.process.Init) !void {
 
     const rand: std.Random = prng.random();
 
-    const d4: Dice = Dice.init(4, rand);
-    const d6: Dice = Dice.init(6, rand);
-    const d8: Dice = Dice.init(8, rand);
-    const d10: Dice = Dice.init(10, rand);
-    const d12: Dice = Dice.init(12, rand);
-    const d20: Dice = Dice.init(20, rand);
-    const d100: Dice = Dice.init(100, rand);
+    dice.d4.setRng(rand);
+    dice.d6.setRng(rand);
+    dice.d8.setRng(rand);
+    dice.d10.setRng(rand);
+    dice.d12.setRng(rand);
+    dice.d20.setRng(rand);
+    dice.d100.setRng(rand);
 
-    const dice_set: DiceSet = .{ .d4 = d4, .d6 = d6, .d8 = d8, .d10 = d10, .d12 = d12, .d20 = d20, .d100 = d100 };
-    dice.PubDiceSet = dice_set;
+    var club: Weapon = weapons.club;
 
-    const club: Weapon = weapons.club;
-
-    std.debug.print("{} rolled a {}\n", .{ club.name, club.roll() });
+    std.debug.print("{s} rolled a {!}\n", .{ club.name, club.roll() });
 }
