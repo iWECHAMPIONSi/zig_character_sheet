@@ -4,4 +4,5 @@ pub const StdErr = error{
     InvalidStateReached,
     InvalidFnCall,
     RuntimeFnCalledAtComptime,
+    DuplicateHash,
 };

@@ -305,3 +305,22 @@ pub var shield: Shield = Shield.compInit(
     2,
     6,
 );
+
+pub const armor_arr: []const Armor = []const Armor{
+    padded,
+    leather,
+    studded_leather,
+    hide,
+    chain_shirt,
+    scale_mail,
+    breastplate,
+    half_plate,
+    ring_mail,
+    chain_mail,
+    splint,
+    plate,
+};
+
+pub const shield_arr: []const Shield = []const Shield{
+    shield,
+};

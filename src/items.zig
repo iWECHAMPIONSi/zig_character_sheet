@@ -1344,3 +1344,124 @@ pub var thieves_tools: Tool = Tool.compInit(
     1.0,
     .none,
 );
+
+pub const ammo_arr: []const Ammo = &.{
+    arrow,
+    blowgun_needle,
+    crossbow_bolt,
+    sling_bullet,
+};
+
+pub const container_arr: []const Container = &.{
+    backpack,
+    barrel,
+    basket,
+    bucket,
+    map_scroll_case,
+    chest,
+};
+
+pub const small_container_arr: []const SmallContainer = &.{
+    component_pouch,
+    pouch,
+    sack,
+};
+
+pub const quiver_arr: []const Quiver = &.{
+    crossbow_bolt_case,
+    quiver,
+};
+
+pub const fluid_container_arr: []const FluidContainer = &.{
+    glass_bottle,
+    flask,
+    jug,
+    iron_pot,
+    vial,
+};
+
+pub const fluid_arr: []const Fluid = &.{
+    acid,
+    alchemists_fire,
+    antitoxin,
+    holy_water,
+    ink,
+    oil,
+    perfume,
+    basic_poison,
+};
+
+pub const item_arr: []const Item = &.{
+    crystal,
+    orb,
+    rod,
+    staff,
+    wand,
+
+    sprig_of_mistletoe,
+    totem,
+    wooden_staff,
+    yew_wand,
+
+    amulet,
+    emblem,
+    reliquary,
+
+    abacus,
+    ball_bearing,
+    bedroll,
+    bell,
+    blanket,
+    block_and_tackle,
+    book,
+    caltrop,
+    candle,
+    chain,
+    chalk,
+    climbers_kit,
+    common_clothes,
+    costume,
+    fine_clothes,
+    travelers_clothes,
+    crowbar,
+    fishing_tackle,
+    grappling_hook,
+    hammer,
+    sledgehammer,
+    healers_kit,
+    hourglass,
+    hunting_trap,
+    ink_pen,
+    ladder,
+    lamp,
+    bullseye_lantern,
+    hooded_lantern,
+    lock,
+    magnifying_glass,
+    manacles,
+    mess_kit,
+    steel_mirror,
+    paper,
+    parchment,
+    miners_pick,
+    piton,
+    pole,
+    portable_ram,
+    ration,
+    robes,
+    hempen_rope,
+    silk_rope,
+    merchants_scale,
+    sealing_wax,
+    shovel,
+    signal_whistle,
+    signet_ring,
+    soap,
+    spellbook,
+    iron_spike,
+    spyglass,
+    two_person_tent,
+    tinderbox,
+    torch,
+    whetstone,
+};

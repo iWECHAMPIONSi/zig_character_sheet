@@ -10,10 +10,16 @@ const currency = @import("currency.zig");
 const Currency = currency.Currency;
 const CurrencyAmount = currency.CurrencyAmount;
 const enums = @import("enums.zig");
+const items = @import("items.zig");
+const armor = @import("armor.zig");
+const errors = @import("errors.zig");
+const StdErr = errors.StdErr;
+const hash_handler = @import("hash_handler.zig");
 
 const zig_character_sheet = @import("zig_character_sheet");
 
 pub fn main(init: std.process.Init) !void {
+    const allocator = init.arena.allocator();
     const io = init.io;
     var io_source: std.Random.IoSource = .{ .io = io };
     const secure_source = io_source.interface();
@@ -30,7 +36,8 @@ pub fn main(init: std.process.Init) !void {
     dice.d20.setRng(rand);
     dice.d100.setRng(rand);
 
-    var club: Weapon = weapons.club;
+    hash_handler.hash_table = std.AutoHashMapUnmanaged(u64, []const u8);
 
-    std.debug.print("{s} rolled a {!}\n", .{ club.name, club.roll() });
+    try hash_handler.startupValidation(allocator);
+    defer hash_handler.hash_table.deinit(allocator);
 }
