@@ -359,22 +359,22 @@ pub const Tool = struct {
 // The PHB gives ammunition weight by bundle.
 // These prototypes represent one individual piece of ammunition.
 
-pub var arrow: Ammo = Ammo.compInit(
+pub const arrow: Ammo = Ammo.compInit(
     "Arrow",
     1.0 / 20.0,
 );
 
-pub var blowgun_needle: Ammo = Ammo.compInit(
+pub const blowgun_needle: Ammo = Ammo.compInit(
     "Blowgun Needle",
     1.0 / 50.0,
 );
 
-pub var crossbow_bolt: Ammo = Ammo.compInit(
+pub const crossbow_bolt: Ammo = Ammo.compInit(
     "Crossbow Bolt",
     1.5 / 20.0,
 );
 
-pub var sling_bullet: Ammo = Ammo.compInit(
+pub const sling_bullet: Ammo = Ammo.compInit(
     "Sling Bullet",
     1.5 / 20.0,
 );
@@ -386,37 +386,37 @@ pub var sling_bullet: Ammo = Ammo.compInit(
 // Backpack is explicitly unable to be placed inside another container despite
 // weighing less than 25 lb.
 
-pub var backpack: Container = Container.compInit(
+pub const backpack: Container = Container.compInit(
     "Backpack",
     5.0,
     false,
 );
 
-pub var barrel: Container = Container.compInit(
+pub const barrel: Container = Container.compInit(
     "Barrel",
     70.0,
     false,
 );
 
-pub var basket: Container = Container.compInit(
+pub const basket: Container = Container.compInit(
     "Basket",
     2.0,
     true,
 );
 
-pub var bucket: Container = Container.compInit(
+pub const bucket: Container = Container.compInit(
     "Bucket",
     2.0,
     true,
 );
 
-pub var map_scroll_case: Container = Container.compInit(
+pub const map_scroll_case: Container = Container.compInit(
     "Map or Scroll Case",
     1.0,
     true,
 );
 
-pub var chest: Container = Container.compInit(
+pub const chest: Container = Container.compInit(
     "Chest",
     25.0,
     false,
@@ -426,17 +426,17 @@ pub var chest: Container = Container.compInit(
 // Small Containers
 // ============================================================================
 
-pub var component_pouch: SmallContainer = SmallContainer.compInit(
+pub const component_pouch: SmallContainer = SmallContainer.compInit(
     "Component Pouch",
     2.0,
 );
 
-pub var pouch: SmallContainer = SmallContainer.compInit(
+pub const pouch: SmallContainer = SmallContainer.compInit(
     "Pouch",
     1.0,
 );
 
-pub var sack: SmallContainer = SmallContainer.compInit(
+pub const sack: SmallContainer = SmallContainer.compInit(
     "Sack",
     0.5,
 );
@@ -445,12 +445,12 @@ pub var sack: SmallContainer = SmallContainer.compInit(
 // Ammunition Containers
 // ============================================================================
 
-pub var crossbow_bolt_case: Quiver = Quiver.compInit(
+pub const crossbow_bolt_case: Quiver = Quiver.compInit(
     "Crossbow Bolt Case",
     1.0,
 );
 
-pub var quiver: Quiver = Quiver.compInit(
+pub const quiver: Quiver = Quiver.compInit(
     "Quiver",
     1.0,
 );
@@ -466,31 +466,31 @@ pub var quiver: Quiver = Quiver.compInit(
 // Pitcher is likewise represented by Jug because the PHB lists them as the
 // same container entry.
 
-pub var glass_bottle: FluidContainer = FluidContainer.compInit(
+pub const glass_bottle: FluidContainer = FluidContainer.compInit(
     "Glass Bottle",
     2.0,
     true,
 );
 
-pub var flask: FluidContainer = FluidContainer.compInit(
+pub const flask: FluidContainer = FluidContainer.compInit(
     "Flask",
     1.0,
     true,
 );
 
-pub var jug: FluidContainer = FluidContainer.compInit(
+pub const jug: FluidContainer = FluidContainer.compInit(
     "Jug",
     4.0,
     true,
 );
 
-pub var iron_pot: FluidContainer = FluidContainer.compInit(
+pub const iron_pot: FluidContainer = FluidContainer.compInit(
     "Iron Pot",
     10.0,
     true,
 );
 
-pub var vial: FluidContainer = FluidContainer.compInit(
+pub const vial: FluidContainer = FluidContainer.compInit(
     "Vial",
     0.0,
     true,
@@ -505,35 +505,35 @@ pub var vial: FluidContainer = FluidContainer.compInit(
 // Fluids contain no weight themselves under the current model.
 // Their FluidContainer supplies the weight.
 
-pub var acid: Fluid = Fluid.compInit(
+pub const acid: Fluid = Fluid.compInit(
     "Acid",
 );
 
-pub var alchemists_fire: Fluid = Fluid.compInit(
+pub const alchemists_fire: Fluid = Fluid.compInit(
     "Alchemist's Fire",
 );
 
-pub var antitoxin: Fluid = Fluid.compInit(
+pub const antitoxin: Fluid = Fluid.compInit(
     "Antitoxin",
 );
 
-pub var holy_water: Fluid = Fluid.compInit(
+pub const holy_water: Fluid = Fluid.compInit(
     "Holy Water",
 );
 
-pub var ink: Fluid = Fluid.compInit(
+pub const ink: Fluid = Fluid.compInit(
     "Ink",
 );
 
-pub var oil: Fluid = Fluid.compInit(
+pub const oil: Fluid = Fluid.compInit(
     "Oil",
 );
 
-pub var perfume: Fluid = Fluid.compInit(
+pub const perfume: Fluid = Fluid.compInit(
     "Perfume",
 );
 
-pub var basic_poison: Fluid = Fluid.compInit(
+pub const basic_poison: Fluid = Fluid.compInit(
     "Basic Poison",
 );
 
@@ -543,7 +543,7 @@ pub var basic_poison: Fluid = Fluid.compInit(
 // Arcane Focuses
 // ============================================================================
 
-pub var crystal: Item = Item.compInit(
+pub const crystal: Item = Item.compInit(
     "Crystal",
     1.0,
     true,
@@ -551,7 +551,7 @@ pub var crystal: Item = Item.compInit(
     null,
 );
 
-pub var orb: Item = Item.compInit(
+pub const orb: Item = Item.compInit(
     "Orb",
     3.0,
     true,
@@ -559,7 +559,7 @@ pub var orb: Item = Item.compInit(
     null,
 );
 
-pub var rod: Item = Item.compInit(
+pub const rod: Item = Item.compInit(
     "Rod",
     2.0,
     true,
@@ -567,7 +567,7 @@ pub var rod: Item = Item.compInit(
     null,
 );
 
-pub var staff: Item = Item.compInit(
+pub const staff: Item = Item.compInit(
     "Staff",
     4.0,
     true,
@@ -575,7 +575,7 @@ pub var staff: Item = Item.compInit(
     null,
 );
 
-pub var wand: Item = Item.compInit(
+pub const wand: Item = Item.compInit(
     "Wand",
     1.0,
     true,
@@ -587,7 +587,7 @@ pub var wand: Item = Item.compInit(
 // Druidic Focuses
 // ============================================================================
 
-pub var sprig_of_mistletoe: Item = Item.compInit(
+pub const sprig_of_mistletoe: Item = Item.compInit(
     "Sprig of Mistletoe",
     0.0,
     true,
@@ -595,7 +595,7 @@ pub var sprig_of_mistletoe: Item = Item.compInit(
     null,
 );
 
-pub var totem: Item = Item.compInit(
+pub const totem: Item = Item.compInit(
     "Totem",
     0.0,
     true,
@@ -603,7 +603,7 @@ pub var totem: Item = Item.compInit(
     null,
 );
 
-pub var wooden_staff: Item = Item.compInit(
+pub const wooden_staff: Item = Item.compInit(
     "Wooden Staff",
     4.0,
     true,
@@ -611,7 +611,7 @@ pub var wooden_staff: Item = Item.compInit(
     null,
 );
 
-pub var yew_wand: Item = Item.compInit(
+pub const yew_wand: Item = Item.compInit(
     "Yew Wand",
     1.0,
     true,
@@ -623,7 +623,7 @@ pub var yew_wand: Item = Item.compInit(
 // Holy Symbols
 // ============================================================================
 
-pub var amulet: Item = Item.compInit(
+pub const amulet: Item = Item.compInit(
     "Amulet",
     1.0,
     true,
@@ -631,7 +631,7 @@ pub var amulet: Item = Item.compInit(
     null,
 );
 
-pub var emblem: Item = Item.compInit(
+pub const emblem: Item = Item.compInit(
     "Emblem",
     0.0,
     true,
@@ -639,7 +639,7 @@ pub var emblem: Item = Item.compInit(
     null,
 );
 
-pub var reliquary: Item = Item.compInit(
+pub const reliquary: Item = Item.compInit(
     "Reliquary",
     2.0,
     true,
@@ -651,7 +651,7 @@ pub var reliquary: Item = Item.compInit(
 // Adventuring Gear
 // ============================================================================
 
-pub var abacus: Item = Item.compInit(
+pub const abacus: Item = Item.compInit(
     "Abacus",
     2.0,
     true,
@@ -659,7 +659,7 @@ pub var abacus: Item = Item.compInit(
     null,
 );
 
-pub var ball_bearing: Item = Item.compInit(
+pub const ball_bearing: Item = Item.compInit(
     "Ball Bearing",
     2.0 / 1000.0,
     true,
@@ -667,7 +667,7 @@ pub var ball_bearing: Item = Item.compInit(
     null,
 );
 
-pub var bedroll: Item = Item.compInit(
+pub const bedroll: Item = Item.compInit(
     "Bedroll",
     7.0,
     true,
@@ -675,7 +675,7 @@ pub var bedroll: Item = Item.compInit(
     null,
 );
 
-pub var bell: Item = Item.compInit(
+pub const bell: Item = Item.compInit(
     "Bell",
     0.0,
     true,
@@ -683,7 +683,7 @@ pub var bell: Item = Item.compInit(
     null,
 );
 
-pub var blanket: Item = Item.compInit(
+pub const blanket: Item = Item.compInit(
     "Blanket",
     3.0,
     true,
@@ -691,7 +691,7 @@ pub var blanket: Item = Item.compInit(
     null,
 );
 
-pub var block_and_tackle: Item = Item.compInit(
+pub const block_and_tackle: Item = Item.compInit(
     "Block and Tackle",
     5.0,
     true,
@@ -699,7 +699,7 @@ pub var block_and_tackle: Item = Item.compInit(
     null,
 );
 
-pub var book: Item = Item.compInit(
+pub const book: Item = Item.compInit(
     "Book",
     5.0,
     true,
@@ -707,7 +707,7 @@ pub var book: Item = Item.compInit(
     null,
 );
 
-pub var caltrop: Item = Item.compInit(
+pub const caltrop: Item = Item.compInit(
     "Caltrop",
     2.0 / 20.0,
     true,
@@ -715,7 +715,7 @@ pub var caltrop: Item = Item.compInit(
     null,
 );
 
-pub var candle: Item = Item.compInit(
+pub const candle: Item = Item.compInit(
     "Candle",
     0.0,
     true,
@@ -723,7 +723,7 @@ pub var candle: Item = Item.compInit(
     null,
 );
 
-pub var chain: Item = Item.compInit(
+pub const chain: Item = Item.compInit(
     "Chain",
     10.0,
     true,
@@ -731,7 +731,7 @@ pub var chain: Item = Item.compInit(
     10,
 );
 
-pub var chalk: Item = Item.compInit(
+pub const chalk: Item = Item.compInit(
     "Chalk",
     0.0,
     true,
@@ -739,7 +739,7 @@ pub var chalk: Item = Item.compInit(
     null,
 );
 
-pub var climbers_kit: Item = Item.compInit(
+pub const climbers_kit: Item = Item.compInit(
     "Climber's Kit",
     12.0,
     true,
@@ -747,7 +747,7 @@ pub var climbers_kit: Item = Item.compInit(
     null,
 );
 
-pub var common_clothes: Item = Item.compInit(
+pub const common_clothes: Item = Item.compInit(
     "Common Clothes",
     3.0,
     true,
@@ -755,7 +755,7 @@ pub var common_clothes: Item = Item.compInit(
     null,
 );
 
-pub var costume: Item = Item.compInit(
+pub const costume: Item = Item.compInit(
     "Costume",
     4.0,
     true,
@@ -763,7 +763,7 @@ pub var costume: Item = Item.compInit(
     null,
 );
 
-pub var fine_clothes: Item = Item.compInit(
+pub const fine_clothes: Item = Item.compInit(
     "Fine Clothes",
     6.0,
     true,
@@ -771,7 +771,7 @@ pub var fine_clothes: Item = Item.compInit(
     null,
 );
 
-pub var travelers_clothes: Item = Item.compInit(
+pub const travelers_clothes: Item = Item.compInit(
     "Traveler's Clothes",
     4.0,
     true,
@@ -779,7 +779,7 @@ pub var travelers_clothes: Item = Item.compInit(
     null,
 );
 
-pub var crowbar: Item = Item.compInit(
+pub const crowbar: Item = Item.compInit(
     "Crowbar",
     5.0,
     true,
@@ -787,7 +787,7 @@ pub var crowbar: Item = Item.compInit(
     null,
 );
 
-pub var fishing_tackle: Item = Item.compInit(
+pub const fishing_tackle: Item = Item.compInit(
     "Fishing Tackle",
     4.0,
     true,
@@ -795,7 +795,7 @@ pub var fishing_tackle: Item = Item.compInit(
     null,
 );
 
-pub var grappling_hook: Item = Item.compInit(
+pub const grappling_hook: Item = Item.compInit(
     "Grappling Hook",
     4.0,
     true,
@@ -803,7 +803,7 @@ pub var grappling_hook: Item = Item.compInit(
     null,
 );
 
-pub var hammer: Item = Item.compInit(
+pub const hammer: Item = Item.compInit(
     "Hammer",
     3.0,
     true,
@@ -811,7 +811,7 @@ pub var hammer: Item = Item.compInit(
     null,
 );
 
-pub var sledgehammer: Item = Item.compInit(
+pub const sledgehammer: Item = Item.compInit(
     "Sledgehammer",
     10.0,
     true,
@@ -819,7 +819,7 @@ pub var sledgehammer: Item = Item.compInit(
     null,
 );
 
-pub var healers_kit: Item = Item.compInit(
+pub const healers_kit: Item = Item.compInit(
     "Healer's Kit",
     3.0,
     true,
@@ -827,7 +827,7 @@ pub var healers_kit: Item = Item.compInit(
     null,
 );
 
-pub var hourglass: Item = Item.compInit(
+pub const hourglass: Item = Item.compInit(
     "Hourglass",
     1.0,
     true,
@@ -835,7 +835,7 @@ pub var hourglass: Item = Item.compInit(
     null,
 );
 
-pub var hunting_trap: Item = Item.compInit(
+pub const hunting_trap: Item = Item.compInit(
     "Hunting Trap",
     25.0,
     false,
@@ -843,7 +843,7 @@ pub var hunting_trap: Item = Item.compInit(
     null,
 );
 
-pub var ink_pen: Item = Item.compInit(
+pub const ink_pen: Item = Item.compInit(
     "Ink Pen",
     0.0,
     true,
@@ -851,7 +851,7 @@ pub var ink_pen: Item = Item.compInit(
     null,
 );
 
-pub var ladder: Item = Item.compInit(
+pub const ladder: Item = Item.compInit(
     "Ladder",
     25.0,
     false,
@@ -859,7 +859,7 @@ pub var ladder: Item = Item.compInit(
     10,
 );
 
-pub var lamp: Item = Item.compInit(
+pub const lamp: Item = Item.compInit(
     "Lamp",
     1.0,
     true,
@@ -867,7 +867,7 @@ pub var lamp: Item = Item.compInit(
     null,
 );
 
-pub var bullseye_lantern: Item = Item.compInit(
+pub const bullseye_lantern: Item = Item.compInit(
     "Bullseye Lantern",
     2.0,
     true,
@@ -875,7 +875,7 @@ pub var bullseye_lantern: Item = Item.compInit(
     null,
 );
 
-pub var hooded_lantern: Item = Item.compInit(
+pub const hooded_lantern: Item = Item.compInit(
     "Hooded Lantern",
     2.0,
     true,
@@ -883,7 +883,7 @@ pub var hooded_lantern: Item = Item.compInit(
     null,
 );
 
-pub var lock: Item = Item.compInit(
+pub const lock: Item = Item.compInit(
     "Lock",
     1.0,
     true,
@@ -891,7 +891,7 @@ pub var lock: Item = Item.compInit(
     null,
 );
 
-pub var magnifying_glass: Item = Item.compInit(
+pub const magnifying_glass: Item = Item.compInit(
     "Magnifying Glass",
     0.0,
     true,
@@ -899,7 +899,7 @@ pub var magnifying_glass: Item = Item.compInit(
     null,
 );
 
-pub var manacles: Item = Item.compInit(
+pub const manacles: Item = Item.compInit(
     "Manacles",
     6.0,
     true,
@@ -907,7 +907,7 @@ pub var manacles: Item = Item.compInit(
     null,
 );
 
-pub var mess_kit: Item = Item.compInit(
+pub const mess_kit: Item = Item.compInit(
     "Mess Kit",
     1.0,
     true,
@@ -915,7 +915,7 @@ pub var mess_kit: Item = Item.compInit(
     null,
 );
 
-pub var steel_mirror: Item = Item.compInit(
+pub const steel_mirror: Item = Item.compInit(
     "Steel Mirror",
     0.5,
     true,
@@ -923,7 +923,7 @@ pub var steel_mirror: Item = Item.compInit(
     null,
 );
 
-pub var paper: Item = Item.compInit(
+pub const paper: Item = Item.compInit(
     "Paper",
     0.0,
     true,
@@ -931,7 +931,7 @@ pub var paper: Item = Item.compInit(
     null,
 );
 
-pub var parchment: Item = Item.compInit(
+pub const parchment: Item = Item.compInit(
     "Parchment",
     0.0,
     true,
@@ -939,7 +939,7 @@ pub var parchment: Item = Item.compInit(
     null,
 );
 
-pub var miners_pick: Item = Item.compInit(
+pub const miners_pick: Item = Item.compInit(
     "Miner's Pick",
     10.0,
     true,
@@ -947,7 +947,7 @@ pub var miners_pick: Item = Item.compInit(
     null,
 );
 
-pub var piton: Item = Item.compInit(
+pub const piton: Item = Item.compInit(
     "Piton",
     0.25,
     true,
@@ -955,7 +955,7 @@ pub var piton: Item = Item.compInit(
     null,
 );
 
-pub var pole: Item = Item.compInit(
+pub const pole: Item = Item.compInit(
     "Pole",
     7.0,
     true,
@@ -963,7 +963,7 @@ pub var pole: Item = Item.compInit(
     10,
 );
 
-pub var portable_ram: Item = Item.compInit(
+pub const portable_ram: Item = Item.compInit(
     "Portable Ram",
     35.0,
     false,
@@ -971,7 +971,7 @@ pub var portable_ram: Item = Item.compInit(
     null,
 );
 
-pub var ration: Item = Item.compInit(
+pub const ration: Item = Item.compInit(
     "Ration",
     2.0,
     true,
@@ -979,7 +979,7 @@ pub var ration: Item = Item.compInit(
     null,
 );
 
-pub var robes: Item = Item.compInit(
+pub const robes: Item = Item.compInit(
     "Robes",
     4.0,
     true,
@@ -987,7 +987,7 @@ pub var robes: Item = Item.compInit(
     null,
 );
 
-pub var hempen_rope: Item = Item.compInit(
+pub const hempen_rope: Item = Item.compInit(
     "Hempen Rope",
     10.0,
     true,
@@ -995,7 +995,7 @@ pub var hempen_rope: Item = Item.compInit(
     50,
 );
 
-pub var silk_rope: Item = Item.compInit(
+pub const silk_rope: Item = Item.compInit(
     "Silk Rope",
     5.0,
     true,
@@ -1003,7 +1003,7 @@ pub var silk_rope: Item = Item.compInit(
     50,
 );
 
-pub var merchants_scale: Item = Item.compInit(
+pub const merchants_scale: Item = Item.compInit(
     "Merchant's Scale",
     3.0,
     true,
@@ -1011,7 +1011,7 @@ pub var merchants_scale: Item = Item.compInit(
     null,
 );
 
-pub var sealing_wax: Item = Item.compInit(
+pub const sealing_wax: Item = Item.compInit(
     "Sealing Wax",
     0.0,
     true,
@@ -1019,7 +1019,7 @@ pub var sealing_wax: Item = Item.compInit(
     null,
 );
 
-pub var shovel: Item = Item.compInit(
+pub const shovel: Item = Item.compInit(
     "Shovel",
     5.0,
     true,
@@ -1027,7 +1027,7 @@ pub var shovel: Item = Item.compInit(
     null,
 );
 
-pub var signal_whistle: Item = Item.compInit(
+pub const signal_whistle: Item = Item.compInit(
     "Signal Whistle",
     0.0,
     true,
@@ -1035,7 +1035,7 @@ pub var signal_whistle: Item = Item.compInit(
     null,
 );
 
-pub var signet_ring: Item = Item.compInit(
+pub const signet_ring: Item = Item.compInit(
     "Signet Ring",
     0.0,
     true,
@@ -1043,7 +1043,7 @@ pub var signet_ring: Item = Item.compInit(
     null,
 );
 
-pub var soap: Item = Item.compInit(
+pub const soap: Item = Item.compInit(
     "Soap",
     0.0,
     true,
@@ -1051,7 +1051,7 @@ pub var soap: Item = Item.compInit(
     null,
 );
 
-pub var spellbook: Item = Item.compInit(
+pub const spellbook: Item = Item.compInit(
     "Spellbook",
     3.0,
     true,
@@ -1059,7 +1059,7 @@ pub var spellbook: Item = Item.compInit(
     null,
 );
 
-pub var iron_spike: Item = Item.compInit(
+pub const iron_spike: Item = Item.compInit(
     "Iron Spike",
     5.0 / 10.0,
     true,
@@ -1067,7 +1067,7 @@ pub var iron_spike: Item = Item.compInit(
     null,
 );
 
-pub var spyglass: Item = Item.compInit(
+pub const spyglass: Item = Item.compInit(
     "Spyglass",
     1.0,
     true,
@@ -1075,7 +1075,7 @@ pub var spyglass: Item = Item.compInit(
     null,
 );
 
-pub var two_person_tent: Item = Item.compInit(
+pub const two_person_tent: Item = Item.compInit(
     "Two-Person Tent",
     20.0,
     true,
@@ -1083,7 +1083,7 @@ pub var two_person_tent: Item = Item.compInit(
     null,
 );
 
-pub var tinderbox: Item = Item.compInit(
+pub const tinderbox: Item = Item.compInit(
     "Tinderbox",
     1.0,
     true,
@@ -1091,7 +1091,7 @@ pub var tinderbox: Item = Item.compInit(
     null,
 );
 
-pub var torch: Item = Item.compInit(
+pub const torch: Item = Item.compInit(
     "Torch",
     1.0,
     true,
@@ -1099,7 +1099,7 @@ pub var torch: Item = Item.compInit(
     null,
 );
 
-pub var whetstone: Item = Item.compInit(
+pub const whetstone: Item = Item.compInit(
     "Whetstone",
     1.0,
     true,
@@ -1111,103 +1111,103 @@ pub var whetstone: Item = Item.compInit(
 // Artisan's Tools
 // ============================================================================
 
-pub var alchemists_supplies: Tool = Tool.compInit(
+pub const alchemists_supplies: Tool = Tool.compInit(
     "Alchemist's Supplies",
     8.0,
     .artisans,
 );
 
-pub var brewers_supplies: Tool = Tool.compInit(
+pub const brewers_supplies: Tool = Tool.compInit(
     "Brewer's Supplies",
     9.0,
     .artisans,
 );
 
-pub var calligraphers_supplies: Tool = Tool.compInit(
+pub const calligraphers_supplies: Tool = Tool.compInit(
     "Calligrapher's Supplies",
     5.0,
     .artisans,
 );
 
-pub var carpenters_tools: Tool = Tool.compInit(
+pub const carpenters_tools: Tool = Tool.compInit(
     "Carpenter's Tools",
     6.0,
     .artisans,
 );
 
-pub var cartographers_tools: Tool = Tool.compInit(
+pub const cartographers_tools: Tool = Tool.compInit(
     "Cartographer's Tools",
     6.0,
     .artisans,
 );
 
-pub var cobblers_tools: Tool = Tool.compInit(
+pub const cobblers_tools: Tool = Tool.compInit(
     "Cobbler's Tools",
     5.0,
     .artisans,
 );
 
-pub var cooks_utensils: Tool = Tool.compInit(
+pub const cooks_utensils: Tool = Tool.compInit(
     "Cook's Utensils",
     8.0,
     .artisans,
 );
 
-pub var glassblowers_tools: Tool = Tool.compInit(
+pub const glassblowers_tools: Tool = Tool.compInit(
     "Glassblower's Tools",
     5.0,
     .artisans,
 );
 
-pub var jewelers_tools: Tool = Tool.compInit(
+pub const jewelers_tools: Tool = Tool.compInit(
     "Jeweler's Tools",
     2.0,
     .artisans,
 );
 
-pub var leatherworkers_tools: Tool = Tool.compInit(
+pub const leatherworkers_tools: Tool = Tool.compInit(
     "Leatherworker's Tools",
     5.0,
     .artisans,
 );
 
-pub var masons_tools: Tool = Tool.compInit(
+pub const masons_tools: Tool = Tool.compInit(
     "Mason's Tools",
     8.0,
     .artisans,
 );
 
-pub var painters_supplies: Tool = Tool.compInit(
+pub const painters_supplies: Tool = Tool.compInit(
     "Painter's Supplies",
     5.0,
     .artisans,
 );
 
-pub var potters_tools: Tool = Tool.compInit(
+pub const potters_tools: Tool = Tool.compInit(
     "Potter's Tools",
     3.0,
     .artisans,
 );
 
-pub var smiths_tools: Tool = Tool.compInit(
+pub const smiths_tools: Tool = Tool.compInit(
     "Smith's Tools",
     8.0,
     .artisans,
 );
 
-pub var tinkers_tools: Tool = Tool.compInit(
+pub const tinkers_tools: Tool = Tool.compInit(
     "Tinker's Tools",
     10.0,
     .artisans,
 );
 
-pub var weavers_tools: Tool = Tool.compInit(
+pub const weavers_tools: Tool = Tool.compInit(
     "Weaver's Tools",
     5.0,
     .artisans,
 );
 
-pub var woodcarvers_tools: Tool = Tool.compInit(
+pub const woodcarvers_tools: Tool = Tool.compInit(
     "Woodcarver's Tools",
     5.0,
     .artisans,
@@ -1217,25 +1217,25 @@ pub var woodcarvers_tools: Tool = Tool.compInit(
 // Gaming Sets
 // ============================================================================
 
-pub var dice_set: Tool = Tool.compInit(
+pub const dice_set: Tool = Tool.compInit(
     "Dice Set",
     0.0,
     .gaming_set,
 );
 
-pub var dragonchess_set: Tool = Tool.compInit(
+pub const dragonchess_set: Tool = Tool.compInit(
     "Dragonchess Set",
     0.5,
     .gaming_set,
 );
 
-pub var playing_card_set: Tool = Tool.compInit(
+pub const playing_card_set: Tool = Tool.compInit(
     "Playing Card Set",
     0.0,
     .gaming_set,
 );
 
-pub var three_dragon_ante_set: Tool = Tool.compInit(
+pub const three_dragon_ante_set: Tool = Tool.compInit(
     "Three-Dragon Ante Set",
     0.0,
     .gaming_set,
@@ -1245,61 +1245,61 @@ pub var three_dragon_ante_set: Tool = Tool.compInit(
 // Musical Instruments
 // ============================================================================
 
-pub var bagpipes: Tool = Tool.compInit(
+pub const bagpipes: Tool = Tool.compInit(
     "Bagpipes",
     6.0,
     .instrument,
 );
 
-pub var drum: Tool = Tool.compInit(
+pub const drum: Tool = Tool.compInit(
     "Drum",
     3.0,
     .instrument,
 );
 
-pub var dulcimer: Tool = Tool.compInit(
+pub const dulcimer: Tool = Tool.compInit(
     "Dulcimer",
     10.0,
     .instrument,
 );
 
-pub var flute: Tool = Tool.compInit(
+pub const flute: Tool = Tool.compInit(
     "Flute",
     1.0,
     .instrument,
 );
 
-pub var lute: Tool = Tool.compInit(
+pub const lute: Tool = Tool.compInit(
     "Lute",
     2.0,
     .instrument,
 );
 
-pub var lyre: Tool = Tool.compInit(
+pub const lyre: Tool = Tool.compInit(
     "Lyre",
     2.0,
     .instrument,
 );
 
-pub var horn: Tool = Tool.compInit(
+pub const horn: Tool = Tool.compInit(
     "Horn",
     2.0,
     .instrument,
 );
 
-pub var pan_flute: Tool = Tool.compInit(
+pub const pan_flute: Tool = Tool.compInit(
     "Pan Flute",
     2.0,
     .instrument,
 );
 
-pub var shawm: Tool = Tool.compInit(
+pub const shawm: Tool = Tool.compInit(
     "Shawm",
     1.0,
     .instrument,
 );
 
-pub var viol: Tool = Tool.compInit(
+pub const viol: Tool = Tool.compInit(
     "Viol",
     1.0,
     .instrument,
@@ -1309,50 +1309,50 @@ pub var viol: Tool = Tool.compInit(
 // Other Tools
 // ============================================================================
 
-pub var disguise_kit: Tool = Tool.compInit(
+pub const disguise_kit: Tool = Tool.compInit(
     "Disguise Kit",
     3.0,
     .none,
 );
 
-pub var forgery_kit: Tool = Tool.compInit(
+pub const forgery_kit: Tool = Tool.compInit(
     "Forgery Kit",
     5.0,
     .none,
 );
 
-pub var herbalism_kit: Tool = Tool.compInit(
+pub const herbalism_kit: Tool = Tool.compInit(
     "Herbalism Kit",
     3.0,
     .none,
 );
 
-pub var navigators_tools: Tool = Tool.compInit(
+pub const navigators_tools: Tool = Tool.compInit(
     "Navigator's Tools",
     2.0,
     .none,
 );
 
-pub var poisoners_kit: Tool = Tool.compInit(
+pub const poisoners_kit: Tool = Tool.compInit(
     "Poisoner's Kit",
     2.0,
     .none,
 );
 
-pub var thieves_tools: Tool = Tool.compInit(
+pub const thieves_tools: Tool = Tool.compInit(
     "Thieves' Tools",
     1.0,
     .none,
 );
 
-pub const ammo_arr: []const Ammo = &.{
+pub const ammo_arr = [_]Ammo{
     arrow,
     blowgun_needle,
     crossbow_bolt,
     sling_bullet,
 };
 
-pub const container_arr: []const Container = &.{
+pub const container_arr = [_]Container{
     backpack,
     barrel,
     basket,
@@ -1361,18 +1361,18 @@ pub const container_arr: []const Container = &.{
     chest,
 };
 
-pub const small_container_arr: []const SmallContainer = &.{
+pub const small_container_arr = [_]SmallContainer{
     component_pouch,
     pouch,
     sack,
 };
 
-pub const quiver_arr: []const Quiver = &.{
+pub const quiver_arr = [_]Quiver{
     crossbow_bolt_case,
     quiver,
 };
 
-pub const fluid_container_arr: []const FluidContainer = &.{
+pub const fluid_container_arr = [_]FluidContainer{
     glass_bottle,
     flask,
     jug,
@@ -1380,7 +1380,7 @@ pub const fluid_container_arr: []const FluidContainer = &.{
     vial,
 };
 
-pub const fluid_arr: []const Fluid = &.{
+pub const fluid_arr = [_]Fluid{
     acid,
     alchemists_fire,
     antitoxin,
@@ -1391,7 +1391,7 @@ pub const fluid_arr: []const Fluid = &.{
     basic_poison,
 };
 
-pub const item_arr: []const Item = &.{
+pub const item_arr = [_]Item{
     crystal,
     orb,
     rod,

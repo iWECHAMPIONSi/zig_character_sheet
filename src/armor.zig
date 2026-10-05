@@ -120,7 +120,7 @@ pub const Shield = struct {
 // Light Armor
 // ============================================================================
 
-pub var padded: Armor = Armor.compInit(
+pub const padded: Armor = Armor.compInit(
     "Padded",
     .light,
     .{
@@ -135,7 +135,7 @@ pub var padded: Armor = Armor.compInit(
     8.0,
 );
 
-pub var leather: Armor = Armor.compInit(
+pub const leather: Armor = Armor.compInit(
     "Leather",
     .light,
     .{
@@ -150,7 +150,7 @@ pub var leather: Armor = Armor.compInit(
     10.0,
 );
 
-pub var studded_leather: Armor = Armor.compInit(
+pub const studded_leather: Armor = Armor.compInit(
     "Studded Leather",
     .light,
     .{
@@ -169,7 +169,7 @@ pub var studded_leather: Armor = Armor.compInit(
 // Medium Armor
 // ============================================================================
 
-pub var hide: Armor = Armor.compInit(
+pub const hide: Armor = Armor.compInit(
     "Hide",
     .medium,
     .{
@@ -184,7 +184,7 @@ pub var hide: Armor = Armor.compInit(
     12.0,
 );
 
-pub var chain_shirt: Armor = Armor.compInit(
+pub const chain_shirt: Armor = Armor.compInit(
     "Chain Shirt",
     .medium,
     .{
@@ -199,7 +199,7 @@ pub var chain_shirt: Armor = Armor.compInit(
     20.0,
 );
 
-pub var scale_mail: Armor = Armor.compInit(
+pub const scale_mail: Armor = Armor.compInit(
     "Scale Mail",
     .medium,
     .{
@@ -214,7 +214,7 @@ pub var scale_mail: Armor = Armor.compInit(
     45.0,
 );
 
-pub var breastplate: Armor = Armor.compInit(
+pub const breastplate: Armor = Armor.compInit(
     "Breastplate",
     .medium,
     .{
@@ -229,7 +229,7 @@ pub var breastplate: Armor = Armor.compInit(
     20.0,
 );
 
-pub var half_plate: Armor = Armor.compInit(
+pub const half_plate: Armor = Armor.compInit(
     "Half Plate",
     .medium,
     .{
@@ -248,7 +248,7 @@ pub var half_plate: Armor = Armor.compInit(
 // Heavy Armor
 // ============================================================================
 
-pub var ring_mail: Armor = Armor.compInit(
+pub const ring_mail: Armor = Armor.compInit(
     "Ring Mail",
     .heavy,
     .{
@@ -260,7 +260,7 @@ pub var ring_mail: Armor = Armor.compInit(
     40.0,
 );
 
-pub var chain_mail: Armor = Armor.compInit(
+pub const chain_mail: Armor = Armor.compInit(
     "Chain Mail",
     .heavy,
     .{
@@ -272,7 +272,7 @@ pub var chain_mail: Armor = Armor.compInit(
     55.0,
 );
 
-pub var splint: Armor = Armor.compInit(
+pub const splint: Armor = Armor.compInit(
     "Splint",
     .heavy,
     .{
@@ -284,7 +284,7 @@ pub var splint: Armor = Armor.compInit(
     60.0,
 );
 
-pub var plate: Armor = Armor.compInit(
+pub const plate: Armor = Armor.compInit(
     "Plate",
     .heavy,
     .{
@@ -300,13 +300,13 @@ pub var plate: Armor = Armor.compInit(
 // Shield
 // ============================================================================
 
-pub var shield: Shield = Shield.compInit(
+pub const shield: Shield = Shield.compInit(
     "Shield",
     2,
     6,
 );
 
-pub const armor_arr: []const Armor = []const Armor{
+pub const armor_arr = [_]Armor{
     padded,
     leather,
     studded_leather,
@@ -321,6 +321,6 @@ pub const armor_arr: []const Armor = []const Armor{
     plate,
 };
 
-pub const shield_arr: []const Shield = []const Shield{
+pub const shield_arr = [_]Shield{
     shield,
 };

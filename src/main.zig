@@ -36,8 +36,6 @@ pub fn main(init: std.process.Init) !void {
     dice.d20.setRng(rand);
     dice.d100.setRng(rand);
 
-    hash_handler.hash_table = std.AutoHashMapUnmanaged(u64, []const u8);
-
     try hash_handler.startupValidation(allocator);
     defer hash_handler.hash_table.deinit(allocator);
 }

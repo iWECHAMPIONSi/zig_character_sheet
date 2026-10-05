@@ -6,6 +6,8 @@ const StdErr = errors.StdErr;
 const dice = @import("dice.zig");
 const Dice = dice.Dice;
 const Roll = dice.Roll;
+const items = @import("items.zig");
+const Ammo = items.Ammo;
 
 pub const RangeDistance = struct {
     normal: i32,
@@ -14,6 +16,7 @@ pub const RangeDistance = struct {
 
 pub const WeaponProperties = struct {
     ammunition: bool,
+    ammo: ?u64,
     finesse: bool,
     heavy: bool,
     light: bool,
@@ -49,7 +52,7 @@ pub const Weapon = struct {
     ) Self {
         return .{
             .name = weapon_name,
-            .hash = hash(0, name),
+            .hash = hash(0, weapon_name),
             .weapon_category = category,
             .weapon_weight = weight,
             .properties = properties,
@@ -63,7 +66,7 @@ pub const Weapon = struct {
         }
         return .{
             .name = weapon_name,
-            .hash = hash(0, name),
+            .hash = hash(0, weapon_name),
             .weapon_category = category,
             .weapon_weight = weight,
             .properties = properties,
@@ -98,35 +101,39 @@ pub const Weapon = struct {
     }
 };
 
-const name: []const u8 = "Club";
-const roll: Roll = .{ .count = 1, .dice = &dice.d4 };
-const weapon_damage: enums.WeaponType = enums.WeaponType.bludgeoning;
-const catagory: enums.WeaponCategory = enums.WeaponCategory.simple;
-const property: WeaponProperties = .{
-    .ammunition = false,
-    .finesse = false,
-    .heavy = false,
-    .light = true,
-    .loading = false,
-    .range = false,
-    .range_distance = null,
-    .reach = false,
-    .special = false,
-    .special_desc = null,
-    .thrown = false,
-    .two_handed = false,
-    .versatile = false,
-    .versatile_dice = null,
-};
-pub var club: Weapon = Weapon.compInit(name, catagory, 2.0, property, weapon_damage, roll);
+pub const club: Weapon = Weapon.compInit(
+    "Club",
+    .simple,
+    2.0,
+    .{
+        .ammunition = false,
+        .ammo = null,
+        .finesse = false,
+        .heavy = false,
+        .light = true,
+        .loading = false,
+        .range = false,
+        .range_distance = null,
+        .reach = false,
+        .special = false,
+        .special_desc = null,
+        .thrown = false,
+        .two_handed = false,
+        .versatile = false,
+        .versatile_dice = null,
+    },
+    .bludgeoning,
+    .{ .count = 1, .dice = &dice.d4 },
+);
 // Simple melee weapons
 
-pub var dagger: Weapon = Weapon.compInit(
+pub const dagger: Weapon = Weapon.compInit(
     "Dagger",
     .simple,
     1.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = true,
         .heavy = false,
         .light = true,
@@ -145,12 +152,13 @@ pub var dagger: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d4 },
 );
 
-pub var greatclub: Weapon = Weapon.compInit(
+pub const greatclub: Weapon = Weapon.compInit(
     "Greatclub",
     .simple,
     10.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -169,12 +177,13 @@ pub var greatclub: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d8 },
 );
 
-pub var handaxe: Weapon = Weapon.compInit(
+pub const handaxe: Weapon = Weapon.compInit(
     "Handaxe",
     .simple,
     2.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = true,
@@ -193,12 +202,13 @@ pub var handaxe: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d6 },
 );
 
-pub var javelin: Weapon = Weapon.compInit(
+pub const javelin: Weapon = Weapon.compInit(
     "Javelin",
     .simple,
     2.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -217,12 +227,13 @@ pub var javelin: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d6 },
 );
 
-pub var light_hammer: Weapon = Weapon.compInit(
+pub const light_hammer: Weapon = Weapon.compInit(
     "Light Hammer",
     .simple,
     2.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = true,
@@ -241,12 +252,13 @@ pub var light_hammer: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d4 },
 );
 
-pub var mace: Weapon = Weapon.compInit(
+pub const mace: Weapon = Weapon.compInit(
     "Mace",
     .simple,
     4.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -265,12 +277,13 @@ pub var mace: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d6 },
 );
 
-pub var quarterstaff: Weapon = Weapon.compInit(
+pub const quarterstaff: Weapon = Weapon.compInit(
     "Quarterstaff",
     .simple,
     4.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -289,12 +302,13 @@ pub var quarterstaff: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d6 },
 );
 
-pub var sickle: Weapon = Weapon.compInit(
+pub const sickle: Weapon = Weapon.compInit(
     "Sickle",
     .simple,
     2.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = true,
@@ -313,12 +327,13 @@ pub var sickle: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d4 },
 );
 
-pub var spear: Weapon = Weapon.compInit(
+pub const spear: Weapon = Weapon.compInit(
     "Spear",
     .simple,
     3.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -339,12 +354,13 @@ pub var spear: Weapon = Weapon.compInit(
 
 // Simple ranged weapons
 
-pub var light_crossbow: Weapon = Weapon.compInit(
+pub const light_crossbow: Weapon = Weapon.compInit(
     "Light Crossbow",
     .simple,
     5.0,
     .{
         .ammunition = true,
+        .ammo = items.crossbow_bolt.hash,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -363,12 +379,13 @@ pub var light_crossbow: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d8 },
 );
 
-pub var dart: Weapon = Weapon.compInit(
+pub const dart: Weapon = Weapon.compInit(
     "Dart",
     .simple,
     0.25,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = true,
         .heavy = false,
         .light = false,
@@ -387,12 +404,13 @@ pub var dart: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d4 },
 );
 
-pub var shortbow: Weapon = Weapon.compInit(
+pub const shortbow: Weapon = Weapon.compInit(
     "Shortbow",
     .simple,
     2.0,
     .{
         .ammunition = true,
+        .ammo = items.arrow.hash,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -411,12 +429,13 @@ pub var shortbow: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d6 },
 );
 
-pub var sling: Weapon = Weapon.compInit(
+pub const sling: Weapon = Weapon.compInit(
     "Sling",
     .simple,
     0.0,
     .{
         .ammunition = true,
+        .ammo = items.sling_bullet.hash,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -437,12 +456,13 @@ pub var sling: Weapon = Weapon.compInit(
 
 // Martial melee weapons
 
-pub var battleaxe: Weapon = Weapon.compInit(
+pub const battleaxe: Weapon = Weapon.compInit(
     "Battleaxe",
     .martial,
     4.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -461,12 +481,13 @@ pub var battleaxe: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d8 },
 );
 
-pub var flail: Weapon = Weapon.compInit(
+pub const flail: Weapon = Weapon.compInit(
     "Flail",
     .martial,
     2.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -485,12 +506,13 @@ pub var flail: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d8 },
 );
 
-pub var glaive: Weapon = Weapon.compInit(
+pub const glaive: Weapon = Weapon.compInit(
     "Glaive",
     .martial,
     6.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = true,
         .light = false,
@@ -509,12 +531,13 @@ pub var glaive: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d10 },
 );
 
-pub var greataxe: Weapon = Weapon.compInit(
+pub const greataxe: Weapon = Weapon.compInit(
     "Greataxe",
     .martial,
     7.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = true,
         .light = false,
@@ -533,12 +556,13 @@ pub var greataxe: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d12 },
 );
 
-pub var greatsword: Weapon = Weapon.compInit(
+pub const greatsword: Weapon = Weapon.compInit(
     "Greatsword",
     .martial,
     6.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = true,
         .light = false,
@@ -557,12 +581,13 @@ pub var greatsword: Weapon = Weapon.compInit(
     Roll{ .count = 2, .dice = &dice.d6 },
 );
 
-pub var halberd: Weapon = Weapon.compInit(
+pub const halberd: Weapon = Weapon.compInit(
     "Halberd",
     .martial,
     6.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = true,
         .light = false,
@@ -581,12 +606,13 @@ pub var halberd: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d10 },
 );
 
-pub var lance: Weapon = Weapon.compInit(
+pub const lance: Weapon = Weapon.compInit(
     "Lance",
     .martial,
     6.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -605,12 +631,13 @@ pub var lance: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d12 },
 );
 
-pub var longsword: Weapon = Weapon.compInit(
+pub const longsword: Weapon = Weapon.compInit(
     "Longsword",
     .martial,
     3.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -629,12 +656,13 @@ pub var longsword: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d8 },
 );
 
-pub var maul: Weapon = Weapon.compInit(
+pub const maul: Weapon = Weapon.compInit(
     "Maul",
     .martial,
     10.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = true,
         .light = false,
@@ -653,12 +681,13 @@ pub var maul: Weapon = Weapon.compInit(
     Roll{ .count = 2, .dice = &dice.d6 },
 );
 
-pub var morningstar: Weapon = Weapon.compInit(
+pub const morningstar: Weapon = Weapon.compInit(
     "Morningstar",
     .martial,
     4.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -677,12 +706,13 @@ pub var morningstar: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d8 },
 );
 
-pub var pike: Weapon = Weapon.compInit(
+pub const pike: Weapon = Weapon.compInit(
     "Pike",
     .martial,
     18.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = true,
         .light = false,
@@ -701,12 +731,13 @@ pub var pike: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d10 },
 );
 
-pub var rapier: Weapon = Weapon.compInit(
+pub const rapier: Weapon = Weapon.compInit(
     "Rapier",
     .martial,
     2.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = true,
         .heavy = false,
         .light = false,
@@ -725,12 +756,13 @@ pub var rapier: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d8 },
 );
 
-pub var scimitar: Weapon = Weapon.compInit(
+pub const scimitar: Weapon = Weapon.compInit(
     "Scimitar",
     .martial,
     3.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = true,
         .heavy = false,
         .light = true,
@@ -749,12 +781,13 @@ pub var scimitar: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d6 },
 );
 
-pub var shortsword: Weapon = Weapon.compInit(
+pub const shortsword: Weapon = Weapon.compInit(
     "Shortsword",
     .martial,
     2.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = true,
         .heavy = false,
         .light = true,
@@ -773,12 +806,13 @@ pub var shortsword: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d6 },
 );
 
-pub var trident: Weapon = Weapon.compInit(
+pub const trident: Weapon = Weapon.compInit(
     "Trident",
     .martial,
     4.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -797,12 +831,13 @@ pub var trident: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d6 },
 );
 
-pub var war_pick: Weapon = Weapon.compInit(
+pub const war_pick: Weapon = Weapon.compInit(
     "War Pick",
     .martial,
     2.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -821,12 +856,13 @@ pub var war_pick: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d8 },
 );
 
-pub var warhammer: Weapon = Weapon.compInit(
+pub const warhammer: Weapon = Weapon.compInit(
     "Warhammer",
     .martial,
     2.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -845,12 +881,13 @@ pub var warhammer: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d8 },
 );
 
-pub var whip: Weapon = Weapon.compInit(
+pub const whip: Weapon = Weapon.compInit(
     "Whip",
     .martial,
     3.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = true,
         .heavy = false,
         .light = false,
@@ -871,12 +908,13 @@ pub var whip: Weapon = Weapon.compInit(
 
 // Martial ranged weapons
 
-pub var blowgun: Weapon = Weapon.compInit(
+pub const blowgun: Weapon = Weapon.compInit(
     "Blowgun",
     .martial,
     1.0,
     .{
         .ammunition = true,
+        .ammo = items.blowgun_needle.hash,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -895,12 +933,13 @@ pub var blowgun: Weapon = Weapon.compInit(
     null,
 );
 
-pub var hand_crossbow: Weapon = Weapon.compInit(
+pub const hand_crossbow: Weapon = Weapon.compInit(
     "Hand Crossbow",
     .martial,
     3.0,
     .{
         .ammunition = true,
+        .ammo = items.crossbow_bolt.hash,
         .finesse = false,
         .heavy = false,
         .light = true,
@@ -919,12 +958,13 @@ pub var hand_crossbow: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d6 },
 );
 
-pub var heavy_crossbow: Weapon = Weapon.compInit(
+pub const heavy_crossbow: Weapon = Weapon.compInit(
     "Heavy Crossbow",
     .martial,
     18.0,
     .{
         .ammunition = true,
+        .ammo = items.crossbow_bolt.hash,
         .finesse = false,
         .heavy = true,
         .light = false,
@@ -943,12 +983,13 @@ pub var heavy_crossbow: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d10 },
 );
 
-pub var longbow: Weapon = Weapon.compInit(
+pub const longbow: Weapon = Weapon.compInit(
     "Longbow",
     .martial,
     2.0,
     .{
         .ammunition = true,
+        .ammo = items.arrow.hash,
         .finesse = false,
         .heavy = true,
         .light = false,
@@ -967,12 +1008,13 @@ pub var longbow: Weapon = Weapon.compInit(
     Roll{ .count = 1, .dice = &dice.d8 },
 );
 
-pub var net: Weapon = Weapon.compInit(
+pub const net: Weapon = Weapon.compInit(
     "Net",
     .martial,
     3.0,
     .{
         .ammunition = false,
+        .ammo = null,
         .finesse = false,
         .heavy = false,
         .light = false,
@@ -991,7 +1033,7 @@ pub var net: Weapon = Weapon.compInit(
     null,
 );
 
-pub const weapon_arr: []const Weapon = &.{
+pub const weapon_arr = [_]Weapon{
     club,
     dagger,
     greatclub,
