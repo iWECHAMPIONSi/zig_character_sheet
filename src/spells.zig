@@ -1,9 +1,5 @@
 const enums = @import("enums.zig");
 
-const class = struct {
-    bard = struct { hash: u64 },
-};
-
 pub const Components = struct {
     v: bool,
     s: bool,
