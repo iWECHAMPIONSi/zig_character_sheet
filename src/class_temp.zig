@@ -1,13 +1,17 @@
-pub const artificer = struct { hash: u64 };
-pub const barbarian = struct { hash: u64 };
-pub const bard = struct { hash: u64 };
-pub const cleric = struct { hash: u64 };
-pub const druid = struct { hash: u64 };
-pub const fighter = struct { hash: u64 };
-pub const monk = struct { hash: u64 };
-pub const paladin = struct { hash: u64 };
-pub const ranger = struct { hash: u64 };
-pub const rogue = struct { hash: u64 };
-pub const sorcerer = struct { hash: u64 };
-pub const warlock = struct { hash: u64 };
-pub const wizard = struct { hash: u64 };
+pub const Class = struct {
+    hash: u64,
+};
+
+pub const artificer = Class{ .hash = 0 };
+pub const barbarian = Class{ .hash = 0 };
+pub const bard = Class{ .hash = 0 };
+pub const cleric = Class{ .hash = 0 };
+pub const druid = Class{ .hash = 0 };
+pub const fighter = Class{ .hash = 0 };
+pub const monk = Class{ .hash = 0 };
+pub const paladin = Class{ .hash = 0 };
+pub const ranger = Class{ .hash = 0 };
+pub const rogue = Class{ .hash = 0 };
+pub const sorcerer = Class{ .hash = 0 };
+pub const warlock = Class{ .hash = 0 };
+pub const wizard = Class{ .hash = 0 };

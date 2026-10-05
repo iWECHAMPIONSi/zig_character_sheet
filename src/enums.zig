@@ -135,7 +135,7 @@ pub const SchoolOfMagic = enum {
     divination,
     enchantment,
     evocation,
-    issusion,
+    illusion,
     necromancy,
     transmutation,
 };
@@ -146,94 +146,5 @@ pub const Shapes = enum {
     cylinder,
     line,
     sphere,
-};
-
-// ======================== UNITS =========================
-
-pub const Time = enum(u64) {
-    instantaneos = 0,
-    second = 1,
-    action = 5, // action and round are the exact same in terms of time, just that it differs outside of the character sheet
-    round = 6,
-    minute = 60,
-    hour = 3600,
-    day = 3600 * 24,
-};
-
-pub const Distance = enum(u64) {
-    inch = 1,
-    foot = 12,
-    yard = 36,
-    mile = 36 * 1760,
-};
-
-pub const Range = union(enum) {
-    self,
-    touch,
-    distance: struct {
-        unit: Distance,
-        value: u64,
-    },
-};
-
-const TravelDistance = struct {
-    unit: Distance,
-    distance: u64,
-};
-
-const TravelPace = struct {
-    minute: TravelDistance,
-    hour: TravelDistance,
-    day: TravelDistance,
-    effect: ?[]const u8,
-};
-
-pub const Pace = struct {
-    pub const fast: TravelPace = .{
-        .minute = .{
-            .unit = .foot,
-            .distance = 400,
-        },
-        .hour = .{
-            .unit = .mile,
-            .distance = 4,
-        },
-        .day = .{
-            .unit = .mile,
-            .distance = 30,
-        },
-        .effect = "-5 penalty to passive Wisdom (Perception) scores",
-    };
-
-    pub const normal: TravelPace = .{
-        .minute = .{
-            .unit = .foot,
-            .distance = 300,
-        },
-        .hour = .{
-            .unit = .mile,
-            .distance = 3,
-        },
-        .day = .{
-            .unit = .mile,
-            .distance = 24,
-        },
-        .effect = null,
-    };
-
-    pub const slow: TravelPace = .{
-        .minute = .{
-            .unit = .foot,
-            .distance = 200,
-        },
-        .hour = .{
-            .unit = .mile,
-            .distance = 2,
-        },
-        .day = .{
-            .unit = .mile,
-            .distance = 18,
-        },
-        .effect = "Able to use stealth",
-    };
+    radius,
 };
