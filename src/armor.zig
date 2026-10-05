@@ -61,7 +61,7 @@ pub const Armor = struct {
         };
     }
 
-    pub fn clone(self: *Self) Self {
+    pub fn clone(self: *const Self) Self {
         return .{
             .name = self.name,
             .hash = self.hash,

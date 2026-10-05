@@ -68,7 +68,7 @@ pub const Item = struct {
         };
     }
 
-    pub fn clone(self: *Self, count: u64) Self {
+    pub fn clone(self: *const Self, count: u64) Self {
         return .{
             .name = self.name,
             .hash = self.hash,
@@ -111,7 +111,7 @@ pub const SmallContainer = struct {
         };
     }
 
-    pub fn clone(self: *Self, allocator: std.mem.Allocator) Self {
+    pub fn clone(self: *const Self, allocator: std.mem.Allocator) Self {
         return .{
             .allocator = allocator,
             .name = self.name,
@@ -157,7 +157,7 @@ pub const Container = struct {
             .contents = null,
         };
     }
-    pub fn clone(self: *Self, allocator: std.mem.Allocator) Self {
+    pub fn clone(self: *const Self, allocator: std.mem.Allocator) Self {
         return .{
             .allocator = allocator,
             .name = self.name,
@@ -199,7 +199,7 @@ pub const Ammo = struct {
             .count = null,
         };
     }
-    pub fn clone(self: *Self, count: u64) Self {
+    pub fn clone(self: *const Self, count: u64) Self {
         return .{
             .name = self.name,
             .hash = self.hash,
@@ -235,7 +235,7 @@ pub const Quiver = struct {
         };
     }
 
-    pub fn clone(self: *Self, allocator: std.mem.Allocator) Self {
+    pub fn clone(self: *const Self, allocator: std.mem.Allocator) Self {
         return .{
             .allocator = allocator,
             .name = self.name,
@@ -272,7 +272,7 @@ pub const Fluid = struct {
         };
     }
 
-    pub fn clone(self: *Self) Self {
+    pub fn clone(self: *const Self) Self {
         return .{
             .name = self.name,
             .hash = self.hash,
@@ -305,7 +305,7 @@ pub const FluidContainer = struct {
             .fluid = null,
         };
     }
-    pub fn clone(self: *Self, fluid: ?Fluid) Self {
+    pub fn clone(self: *const Self, fluid: ?Fluid) Self {
         return .{
             .name = self.name,
             .hash = self.hash,
@@ -341,7 +341,7 @@ pub const Tool = struct {
             .count = null,
         };
     }
-    pub fn clone(self: *Self, count: u64) Self {
+    pub fn clone(self: *const Self, count: u64) Self {
         return .{
             .name = self.name,
             .hash = self.hash,
