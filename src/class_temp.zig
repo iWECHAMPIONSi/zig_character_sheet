@@ -1,0 +1,13 @@
+pub const artificer = struct { hash: u64 };
+pub const barbarian = struct { hash: u64 };
+pub const bard = struct { hash: u64 };
+pub const cleric = struct { hash: u64 };
+pub const druid = struct { hash: u64 };
+pub const fighter = struct { hash: u64 };
+pub const monk = struct { hash: u64 };
+pub const paladin = struct { hash: u64 };
+pub const ranger = struct { hash: u64 };
+pub const rogue = struct { hash: u64 };
+pub const sorcerer = struct { hash: u64 };
+pub const warlock = struct { hash: u64 };
+pub const wizard = struct { hash: u64 };
