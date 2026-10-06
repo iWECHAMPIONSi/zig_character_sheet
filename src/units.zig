@@ -1,4 +1,4 @@
-pub const Time = enum(u64) {
+pub const Time = enum(i64) {
     second = 1,
     minute = 60,
     hour = 3600,
@@ -8,7 +8,7 @@ pub const Time = enum(u64) {
     action,
     round,
 
-    pub fn convert(self: Time) u64 {
+    pub fn convert(self: Time) i64 {
         return switch (self) {
             .instantaneous => 0,
             .action, .round => 6,
@@ -17,17 +17,19 @@ pub const Time = enum(u64) {
     }
 };
 
+pub const TimeValue = struct {
+    unit: Time,
+    count: i64,
+};
+
 pub const Duration = union(enum) {
     instantaneous,
     action,
     round,
-    duration: struct {
-        unit: Time,
-        value: u64,
-    },
+    duration: TimeValue,
 };
 
-pub const Distance = enum(u64) {
+pub const Distance = enum(i64) {
     inch = 1,
     foot = 12,
     yard = 36,
@@ -36,7 +38,7 @@ pub const Distance = enum(u64) {
     self,
     touch,
 
-    pub fn convert(self: Distance) u64 {
+    pub fn convert(self: Distance) i64 {
         return switch (self) {
             .self, .touch => 0,
             else => @intFromEnum(self),
@@ -44,24 +46,21 @@ pub const Distance = enum(u64) {
     }
 };
 
+pub const DistanceValue = struct {
+    unit: Distance,
+    count: i64,
+};
+
 pub const Range = union(enum) {
     self,
     touch,
-    distance: struct {
-        unit: Distance,
-        value: u64,
-    },
-};
-
-const TravelDistance = struct {
-    unit: Distance,
-    distance: u64,
+    distance: DistanceValue,
 };
 
 const TravelPace = struct {
-    minute: TravelDistance,
-    hour: TravelDistance,
-    day: TravelDistance,
+    minute: DistanceValue,
+    hour: DistanceValue,
+    day: DistanceValue,
     effect: ?[]const u8,
 };
 
@@ -69,15 +68,15 @@ pub const Pace = struct {
     pub const fast: TravelPace = .{
         .minute = .{
             .unit = .foot,
-            .distance = 400,
+            .count = 400,
         },
         .hour = .{
             .unit = .mile,
-            .distance = 4,
+            .count = 4,
         },
         .day = .{
             .unit = .mile,
-            .distance = 30,
+            .count = 30,
         },
         .effect = "-5 penalty to passive Wisdom (Perception) scores",
     };
@@ -85,15 +84,15 @@ pub const Pace = struct {
     pub const normal: TravelPace = .{
         .minute = .{
             .unit = .foot,
-            .distance = 300,
+            .count = 300,
         },
         .hour = .{
             .unit = .mile,
-            .distance = 3,
+            .count = 3,
         },
         .day = .{
             .unit = .mile,
-            .distance = 24,
+            .count = 24,
         },
         .effect = null,
     };
@@ -101,16 +100,43 @@ pub const Pace = struct {
     pub const slow: TravelPace = .{
         .minute = .{
             .unit = .foot,
-            .distance = 200,
+            .count = 200,
         },
         .hour = .{
             .unit = .mile,
-            .distance = 2,
+            .count = 2,
         },
         .day = .{
             .unit = .mile,
-            .distance = 18,
+            .count = 18,
         },
         .effect = "Able to use stealth",
     };
+};
+
+pub const Weight = enum(i64) {
+    ounce = 1,
+    pound = 16,
+};
+
+pub const Volume = enum(i64) {
+    ounce = 1,
+    pint = 16,
+    quart = 32,
+    gallon = 128,
+};
+
+pub const WeightValue = struct {
+    unit: Weight,
+    count: f64,
+};
+
+pub const VolumeValue = struct {
+    unit: Volume,
+    count: f64,
+};
+
+pub const CubicVolumeValue = struct {
+    unit: Distance,
+    count: f64,
 };

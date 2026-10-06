@@ -6,7 +6,42 @@ const classes = @import("class_temp.zig");
 const spells = @import("spells.zig");
 const Spell = spells.Spell;
 
-pub const acid_splash: Spell = Spell.compInit(
+const CastingTime = spells.CastingTime;
+const CastingRange = spells.CastingRange;
+const Components = spells.Components;
+const Duration = spells.Duration;
+const HigherLevel = spells.HigherLevel;
+
+fn compInit(
+    comptime name: []const u8,
+    comptime spell_level: enums.SpellLevel,
+    comptime school: enums.SchoolOfMagic,
+    comptime ritual: bool,
+    comptime casting_time: CastingTime,
+    comptime casting_range: CastingRange,
+    comptime components: Components,
+    comptime duration: Duration,
+    comptime desc: []const u8,
+    comptime higher_levels: ?[]const HigherLevel,
+    comptime class: []const u64,
+) Spell {
+    return .{
+        .name = name,
+        .hash = hash(0, name),
+        .spell_level = spell_level,
+        .school = school,
+        .ritual = ritual,
+        .casting_time = casting_time,
+        .casting_range = casting_range,
+        .components = components,
+        .duration = duration,
+        .desc = desc,
+        .higher_levels = higher_levels,
+        .classes = class,
+    };
+}
+
+pub const acid_splash: Spell = compInit(
     "Acid Splash",
     .cantrip,
     .conjuration,
@@ -55,7 +90,7 @@ pub const acid_splash: Spell = Spell.compInit(
     },
 );
 
-pub const blade_ward: Spell = Spell.compInit(
+pub const blade_ward: Spell = compInit(
     "Blade Ward",
     .cantrip,
     .abjuration,
@@ -92,7 +127,7 @@ pub const blade_ward: Spell = Spell.compInit(
     },
 );
 
-pub const booming_blade: Spell = Spell.compInit(
+pub const booming_blade: Spell = compInit(
     "Booming Blade",
     .cantrip,
     .evocation,
@@ -142,7 +177,7 @@ pub const booming_blade: Spell = Spell.compInit(
     },
 );
 
-pub const chill_touch: Spell = Spell.compInit(
+pub const chill_touch: Spell = compInit(
     "Chill Touch",
     .cantrip,
     .necromancy,
@@ -191,7 +226,7 @@ pub const chill_touch: Spell = Spell.compInit(
     },
 );
 
-pub const control_flames: Spell = Spell.compInit(
+pub const control_flames: Spell = compInit(
     "Control Flames",
     .cantrip,
     .transmutation,
@@ -227,7 +262,7 @@ pub const control_flames: Spell = Spell.compInit(
     },
 );
 
-pub const create_bonfire: Spell = Spell.compInit(
+pub const create_bonfire: Spell = compInit(
     "Create Bonfire",
     .cantrip,
     .conjuration,
@@ -278,7 +313,7 @@ pub const create_bonfire: Spell = Spell.compInit(
     },
 );
 
-pub const dancing_lights: Spell = Spell.compInit(
+pub const dancing_lights: Spell = compInit(
     "Dancing Lights",
     .cantrip,
     .evocation,
@@ -315,7 +350,7 @@ pub const dancing_lights: Spell = Spell.compInit(
     },
 );
 
-pub const druidcraft: Spell = Spell.compInit(
+pub const druidcraft: Spell = compInit(
     "Druidcraft",
     .cantrip,
     .transmutation,
@@ -349,7 +384,7 @@ pub const druidcraft: Spell = Spell.compInit(
     },
 );
 
-pub const eldritch_blast: Spell = Spell.compInit(
+pub const eldritch_blast: Spell = compInit(
     "Eldritch Blast",
     .cantrip,
     .evocation,
@@ -396,7 +431,7 @@ pub const eldritch_blast: Spell = Spell.compInit(
     },
 );
 
-pub const encode_thoughts: Spell = Spell.compInit(
+pub const encode_thoughts: Spell = compInit(
     "Encode Thoughts",
     .cantrip,
     .enchantment,
@@ -428,7 +463,7 @@ pub const encode_thoughts: Spell = Spell.compInit(
     &.{},
 );
 
-pub const fire_bolt: Spell = Spell.compInit(
+pub const fire_bolt: Spell = compInit(
     "Fire Bolt",
     .cantrip,
     .evocation,
@@ -477,7 +512,7 @@ pub const fire_bolt: Spell = Spell.compInit(
     },
 );
 
-pub const friends: Spell = Spell.compInit(
+pub const friends: Spell = compInit(
     "Friends",
     .cantrip,
     .enchantment,
@@ -514,7 +549,7 @@ pub const friends: Spell = Spell.compInit(
     },
 );
 
-pub const frostbite: Spell = Spell.compInit(
+pub const frostbite: Spell = compInit(
     "Frostbite",
     .cantrip,
     .evocation,
@@ -565,7 +600,7 @@ pub const frostbite: Spell = Spell.compInit(
     },
 );
 
-pub const green_flame_blade: Spell = Spell.compInit(
+pub const green_flame_blade: Spell = compInit(
     "Green-Flame Blade",
     .cantrip,
     .evocation,
@@ -615,7 +650,7 @@ pub const green_flame_blade: Spell = Spell.compInit(
     },
 );
 
-pub const guidance: Spell = Spell.compInit(
+pub const guidance: Spell = compInit(
     "Guidance",
     .cantrip,
     .divination,
@@ -651,7 +686,7 @@ pub const guidance: Spell = Spell.compInit(
     },
 );
 
-pub const gust: Spell = Spell.compInit(
+pub const gust: Spell = compInit(
     "Gust",
     .cantrip,
     .transmutation,
@@ -687,7 +722,7 @@ pub const gust: Spell = Spell.compInit(
     },
 );
 
-pub const infestation: Spell = Spell.compInit(
+pub const infestation: Spell = compInit(
     "Infestation",
     .cantrip,
     .conjuration,
@@ -737,7 +772,7 @@ pub const infestation: Spell = Spell.compInit(
     },
 );
 
-pub const light: Spell = Spell.compInit(
+pub const light: Spell = compInit(
     "Light",
     .cantrip,
     .evocation,
@@ -775,7 +810,7 @@ pub const light: Spell = Spell.compInit(
     },
 );
 
-pub const lightning_lure: Spell = Spell.compInit(
+pub const lightning_lure: Spell = compInit(
     "Lightning Lure",
     .cantrip,
     .evocation,
@@ -825,7 +860,7 @@ pub const lightning_lure: Spell = Spell.compInit(
     },
 );
 
-pub const mage_hand: Spell = Spell.compInit(
+pub const mage_hand: Spell = compInit(
     "Mage Hand",
     .cantrip,
     .conjuration,
@@ -863,7 +898,7 @@ pub const mage_hand: Spell = Spell.compInit(
     },
 );
 
-pub const magic_stone: Spell = Spell.compInit(
+pub const magic_stone: Spell = compInit(
     "Magic Stone",
     .cantrip,
     .transmutation,
@@ -899,7 +934,7 @@ pub const magic_stone: Spell = Spell.compInit(
     },
 );
 
-pub const mending: Spell = Spell.compInit(
+pub const mending: Spell = compInit(
     "Mending",
     .cantrip,
     .transmutation,
@@ -938,7 +973,7 @@ pub const mending: Spell = Spell.compInit(
     },
 );
 
-pub const message: Spell = Spell.compInit(
+pub const message: Spell = compInit(
     "Message",
     .cantrip,
     .transmutation,
@@ -975,7 +1010,7 @@ pub const message: Spell = Spell.compInit(
     },
 );
 
-pub const mind_sliver: Spell = Spell.compInit(
+pub const mind_sliver: Spell = compInit(
     "Mind Sliver",
     .cantrip,
     .enchantment,
@@ -1020,7 +1055,7 @@ pub const mind_sliver: Spell = Spell.compInit(
     &.{},
 );
 
-pub const minor_illusion: Spell = Spell.compInit(
+pub const minor_illusion: Spell = compInit(
     "Minor Illusion",
     .cantrip,
     .illusion,
@@ -1057,7 +1092,7 @@ pub const minor_illusion: Spell = Spell.compInit(
     },
 );
 
-pub const mold_earth: Spell = Spell.compInit(
+pub const mold_earth: Spell = compInit(
     "Mold Earth",
     .cantrip,
     .transmutation,
@@ -1093,7 +1128,7 @@ pub const mold_earth: Spell = Spell.compInit(
     },
 );
 
-pub const poison_spray: Spell = Spell.compInit(
+pub const poison_spray: Spell = compInit(
     "Poison Spray",
     .cantrip,
     .conjuration,
@@ -1144,7 +1179,7 @@ pub const poison_spray: Spell = Spell.compInit(
     },
 );
 
-pub const prestidigitation: Spell = Spell.compInit(
+pub const prestidigitation: Spell = compInit(
     "Prestidigitation",
     .cantrip,
     .transmutation,
@@ -1182,7 +1217,7 @@ pub const prestidigitation: Spell = Spell.compInit(
     },
 );
 
-pub const primal_savagery: Spell = Spell.compInit(
+pub const primal_savagery: Spell = compInit(
     "Primal Savagery",
     .cantrip,
     .transmutation,
@@ -1229,7 +1264,7 @@ pub const primal_savagery: Spell = Spell.compInit(
     },
 );
 
-pub const produce_flame: Spell = Spell.compInit(
+pub const produce_flame: Spell = compInit(
     "Produce Flame",
     .cantrip,
     .conjuration,
@@ -1276,7 +1311,7 @@ pub const produce_flame: Spell = Spell.compInit(
     },
 );
 
-pub const ray_of_frost: Spell = Spell.compInit(
+pub const ray_of_frost: Spell = compInit(
     "Ray of Frost",
     .cantrip,
     .evocation,
@@ -1325,7 +1360,7 @@ pub const ray_of_frost: Spell = Spell.compInit(
     },
 );
 
-pub const resistance: Spell = Spell.compInit(
+pub const resistance: Spell = compInit(
     "Resistance",
     .cantrip,
     .abjuration,
@@ -1361,7 +1396,7 @@ pub const resistance: Spell = Spell.compInit(
     },
 );
 
-pub const sacred_flame: Spell = Spell.compInit(
+pub const sacred_flame: Spell = compInit(
     "Sacred Flame",
     .cantrip,
     .evocation,
@@ -1408,7 +1443,7 @@ pub const sacred_flame: Spell = Spell.compInit(
     },
 );
 
-pub const shape_water: Spell = Spell.compInit(
+pub const shape_water: Spell = compInit(
     "Shape Water",
     .cantrip,
     .transmutation,
@@ -1444,7 +1479,7 @@ pub const shape_water: Spell = Spell.compInit(
     },
 );
 
-pub const shillelagh: Spell = Spell.compInit(
+pub const shillelagh: Spell = compInit(
     "Shillelagh",
     .cantrip,
     .transmutation,
@@ -1478,7 +1513,7 @@ pub const shillelagh: Spell = Spell.compInit(
     },
 );
 
-pub const shocking_grasp: Spell = Spell.compInit(
+pub const shocking_grasp: Spell = compInit(
     "Shocking Grasp",
     .cantrip,
     .evocation,
@@ -1527,7 +1562,7 @@ pub const shocking_grasp: Spell = Spell.compInit(
     },
 );
 
-pub const spare_the_dying: Spell = Spell.compInit(
+pub const spare_the_dying: Spell = compInit(
     "Spare the Dying",
     .cantrip,
     .necromancy,
@@ -1562,7 +1597,7 @@ pub const spare_the_dying: Spell = Spell.compInit(
     },
 );
 
-pub const sword_burst: Spell = Spell.compInit(
+pub const sword_burst: Spell = compInit(
     "Sword Burst",
     .cantrip,
     .conjuration,
@@ -1612,7 +1647,7 @@ pub const sword_burst: Spell = Spell.compInit(
     },
 );
 
-pub const thaumaturgy: Spell = Spell.compInit(
+pub const thaumaturgy: Spell = compInit(
     "Thaumaturgy",
     .cantrip,
     .transmutation,
@@ -1646,7 +1681,7 @@ pub const thaumaturgy: Spell = Spell.compInit(
     },
 );
 
-pub const thorn_whip: Spell = Spell.compInit(
+pub const thorn_whip: Spell = compInit(
     "Thorn Whip",
     .cantrip,
     .transmutation,
@@ -1694,7 +1729,7 @@ pub const thorn_whip: Spell = Spell.compInit(
     },
 );
 
-pub const thunderclap: Spell = Spell.compInit(
+pub const thunderclap: Spell = compInit(
     "Thunderclap",
     .cantrip,
     .evocation,
@@ -1749,7 +1784,7 @@ pub const thunderclap: Spell = Spell.compInit(
     },
 );
 
-pub const toll_the_dead: Spell = Spell.compInit(
+pub const toll_the_dead: Spell = compInit(
     "Toll the Dead",
     .cantrip,
     .necromancy,
@@ -1798,7 +1833,7 @@ pub const toll_the_dead: Spell = Spell.compInit(
     },
 );
 
-pub const true_strike: Spell = Spell.compInit(
+pub const true_strike: Spell = compInit(
     "True Strike",
     .cantrip,
     .divination,
@@ -1835,7 +1870,7 @@ pub const true_strike: Spell = Spell.compInit(
     },
 );
 
-pub const vicious_mockery: Spell = Spell.compInit(
+pub const vicious_mockery: Spell = compInit(
     "Vicious Mockery",
     .cantrip,
     .enchantment,
@@ -1882,7 +1917,7 @@ pub const vicious_mockery: Spell = Spell.compInit(
     },
 );
 
-pub const word_of_radiance: Spell = Spell.compInit(
+pub const word_of_radiance: Spell = compInit(
     "Word of Radiance",
     .cantrip,
     .evocation,

@@ -3,6 +3,8 @@ const hash = std.hash.Wyhash.hash;
 const enums = @import("enums.zig");
 const units = @import("units.zig");
 const class = @import("class_temp.zig");
+const dice = @import("dice.zig");
+const Roll = dice.Roll;
 
 pub const Components = struct {
     v: bool,
@@ -33,6 +35,7 @@ pub const Duration = struct {
 pub const HigherLevel = struct {
     level: union { character: u8, slot: enums.SpellLevel },
     desc: []const u8,
+    dice_roll: ?Roll,
 };
 
 pub const Spell = struct {
@@ -47,21 +50,23 @@ pub const Spell = struct {
     duration: Duration,
     desc: []const u8,
     higher_levels: ?[]const HigherLevel,
-    classes: []const u64, // the actual classes will be implimented later, but for now we are only going to have a commented out portion that's going to be an array of u64 hashes {
+    classes: []const u64, // the actual classes will be implimented later, but for now we are only going to have a commented out portion that's going to be an array of u64 hashes
+    dice_roll: ?Roll,
     const Self = @This();
 
-    fn compInit(
-        comptime name: []const u8,
-        comptime spell_level: enums.SpellLevel,
-        comptime school: enums.SchoolOfMagic,
-        comptime ritual: bool,
-        comptime casting_time: CastingTime,
-        comptime casting_range: CastingRange,
-        comptime components: Components,
-        comptime duration: Duration,
-        comptime desc: []const u8,
-        comptime higher_levels: ?[]const HigherLevel,
-        comptime classes: []const u64,
+    pub fn init(
+        name: []const u8,
+        spell_level: enums.SpellLevel,
+        school: enums.SchoolOfMagic,
+        ritual: bool,
+        casting_time: CastingTime,
+        casting_range: CastingRange,
+        components: Components,
+        duration: Duration,
+        desc: []const u8,
+        higher_levels: ?[]const HigherLevel,
+        classes: []const u64,
+        dice_roll: ?Roll,
     ) Self {
         return .{
             .name = name,
@@ -76,6 +81,25 @@ pub const Spell = struct {
             .desc = desc,
             .higher_levels = higher_levels,
             .classes = classes,
+            .dice_roll = dice_roll,
+        };
+    }
+
+    pub fn clone(self: *const Self) Self {
+        return .{
+            .name = self.name,
+            .hash = self.hash,
+            .spell_level = self.spell_level,
+            .school = self.school,
+            .ritual = self.ritual,
+            .casting_time = self.casting_time,
+            .casting_range = self.casting_range,
+            .components = self.components,
+            .duration = self.duration,
+            .desc = self.desc,
+            .higher_levels = self.higher_levels,
+            .classes = self.classes,
+            .dice_roll = self.dice_roll,
         };
     }
 };

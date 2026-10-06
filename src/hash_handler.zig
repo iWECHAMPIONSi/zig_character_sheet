@@ -5,6 +5,7 @@ const items = @import("items.zig");
 const errors = @import("errors.zig");
 const StdErr = errors.StdErr;
 const HashMap = @import("hash_table.zig").HashMap;
+const cantrips = @import("cantrips.zig");
 
 pub var hash_table: HashMap = undefined;
 
@@ -97,6 +98,15 @@ pub fn startupValidation(allocator: std.mem.Allocator) StdErr!void {
             return StdErr.DuplicateHash;
         }
         hash_table.put(allocator, fluid.hash, fluid.name) catch {
+            return StdErr.MemoryAllocationFailed;
+        };
+    }
+
+    for (cantrips.cantrip_arr) |cantrip| {
+        if (hash_table.get(cantrip.hash) != null) {
+            return StdErr.DuplicateHash;
+        }
+        hash_table.put(allocator, cantrip.hash, cantrip.name) catch {
             return StdErr.MemoryAllocationFailed;
         };
     }

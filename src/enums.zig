@@ -1,3 +1,5 @@
+// ================================== STATS =========================
+
 pub const Skill = enum {
     acrobatics,
     animal_handling,
@@ -30,7 +32,7 @@ pub const Ability = enum {
 
 pub fn convertScoreToMod(score: u8) i8 {
     const score_mod: i8 = @intCast(score);
-    return @divFloor(score_mod, 2) - 5;
+    return @divTrunc(score_mod, 2) - 5;
 }
 
 pub fn getAbilityFromSkill(skill: Skill) Ability {
@@ -70,32 +72,90 @@ pub const Alignment = enum {
     chaotic_evil,
 };
 
-// ================= WEAPONS ===============
+pub const PlayerStat = enum {
+    hit_points,
+    proficiency,
+    passive_wisdom,
+    max_hit_points,
+    temp_hit_points,
+};
+
+// ======================== MODS ==========================
+
+pub const Mod = union(enum) {
+    ability_score: Ability,
+    ability_mod: Ability,
+    ability_save: Ability,
+
+    skill: Skill,
+
+    player_stat: PlayerStat,
+
+    bonus: Bonus,
+};
+
+pub const DiceMod = enum {
+    strength,
+    dexterity,
+    constitution,
+    intelligence,
+    wisdom,
+    charisma,
+    proficiency,
+    level,
+    half_level,
+    weapon_roll,
+    weapon_dice,
+    spell_mod,
+};
+
+pub const Bonus = enum {
+    proficiency_bonus,
+    weapon_attack,
+    weapon_damage,
+    melee_attack,
+    melee_damage,
+    ranged_attack,
+    ranged_damage,
+    spell_attack,
+    spell_dc,
+    hit_points,
+    armor_class,
+    saving_throw,
+    initiative,
+    speed,
+    passive_wisdom,
+};
+
+// =================== ITEMS ===================
+
+pub const DamageType = union(enum) {
+    physical: PhysicalDamage,
+    magical: MagicDamage,
+};
 
 pub const WeaponCategory = enum {
     simple,
     martial,
 };
 
-pub const WeaponType = enum {
+pub const PhysicalDamage = enum {
     bludgeoning,
     piercing,
     slashing,
 };
 
-// =================== ITEMS ===================
-
-pub const ItemType = enum {
-    weapon,
-    item,
-    container,
-    armor,
-    shield,
-    quiver,
-    fluid_container,
-    ammo,
-    tool,
-    small_container,
+pub const MagicDamage = enum {
+    acid,
+    cold,
+    fire,
+    force,
+    lightning,
+    necrotic,
+    poison,
+    psychic,
+    radiant,
+    thunder,
 };
 
 pub const ToolType = enum {
@@ -105,13 +165,20 @@ pub const ToolType = enum {
     none,
 };
 
-// =================== ARMOR =====================
-
 pub const ArmorCategory = enum {
     light,
     medium,
     heavy,
     shield,
+};
+
+pub const Rarity = enum {
+    common,
+    uncommon,
+    rare,
+    very_rare,
+    legendary,
+    artifact,
 };
 
 // ================== SPELLS ======================
@@ -147,4 +214,38 @@ pub const Shapes = enum {
     line,
     sphere,
     radius,
+};
+
+// ========================= SOURCES ===========================
+
+pub const Source = enum {
+    phb,
+    mm,
+    dmg,
+
+    scag,
+    vgm,
+    xge,
+    ggtr,
+    ai,
+    bgdia,
+    erlw,
+    egtw,
+
+    pub fn sourceName(self: Source) []const u8 {
+        return switch (self) {
+            .phb => "Player's Handbook",
+            .mm => "Monster Manual",
+            .dmg => "Dungeon Master's Guide",
+
+            .scag => "Sword Coast Adventurer's Guide",
+            .vgm => "Volo's Guide to Monsters",
+            .xge => "Xanathar's Guide to Everything",
+            .ggtr => "Guildmasters' Guide to Ravinca",
+            .ai => "Acquisitions Incorporated",
+            .bgdia => "Baldur's Gate: Descent Into Avernus",
+            .erlw => "Eberron: Rising from the Last War",
+            .egtw => "Explorer's Guide to Wildemount",
+        };
+    }
 };
