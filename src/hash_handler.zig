@@ -1,4 +1,5 @@
 const std = @import("std");
+const hash = std.hash.Wyhash.hash;
 const weapons = @import("weapons.zig");
 const armors = @import("armor.zig");
 const items = @import("items.zig");
@@ -10,6 +11,7 @@ const errors = @import("errors.zig");
 const StdErr = errors.StdErr;
 const HashMap = @import("hash_table.zig").HashMap;
 const cantrips = @import("cantrips.zig");
+const spells = @import("all_spells.zig");
 
 pub var hash_table: HashMap = undefined;
 
@@ -17,65 +19,140 @@ pub fn startupValidation(allocator: std.mem.Allocator) StdErr!void {
     hash_table = HashMap.init();
     errdefer hash_table.deinit(allocator);
     for (weapons.weapon_arr) |weapon| {
-        if (hash_table.get(weapon.hash) != null) {
+        if (hash_table.get(.{ .item = weapon.hash }) != null) {
             return StdErr.DuplicateHash;
         }
-        hash_table.put(allocator, weapon.hash, weapon.name) catch {
+        hash_table.put(allocator, .{ .item = weapon.hash }, weapon.name) catch {
             return StdErr.MemoryAllocationFailed;
         };
     }
 
     for (weapons.ammunition_arr) |ammo| {
-        if (hash_table.get(ammo.hash) != null) {
+        if (hash_table.get(.{ .item = ammo.hash }) != null) {
             return StdErr.DuplicateHash;
         }
-        hash_table.put(allocator, ammo.hash, ammo.name) catch {
+        hash_table.put(allocator, .{ .item = ammo.hash }, ammo.name) catch {
             return StdErr.MemoryAllocationFailed;
         };
     }
 
     for (armors.armor_arr) |armor| {
-        if (hash_table.get(armor.hash) != null) {
+        if (hash_table.get(.{ .item = armor.hash }) != null) {
             return StdErr.DuplicateHash;
         }
-        hash_table.put(allocator, armor.hash, armor.name) catch {
+        hash_table.put(allocator, .{ .item = armor.hash }, armor.name) catch {
             return StdErr.MemoryAllocationFailed;
         };
     }
 
     for (armors.shield_arr) |shield| {
-        if (hash_table.get(shield.hash) != null) {
+        if (hash_table.get(.{ .item = shield.hash }) != null) {
             return StdErr.DuplicateHash;
         }
-        hash_table.put(allocator, shield.hash, shield.name) catch {
+        hash_table.put(allocator, .{ .item = shield.hash }, shield.name) catch {
             return StdErr.MemoryAllocationFailed;
         };
     }
 
     for (gear.item_arr) |item| {
-        if (hash_table.get(item.hash) != null) {
+        if (hash_table.get(.{ .item = item.hash }) != null) {
             return StdErr.DuplicateHash;
         }
-        hash_table.put(allocator, item.hash, item.name) catch {
+        hash_table.put(allocator, .{ .item = item.hash }, item.name) catch {
             return StdErr.MemoryAllocationFailed;
         };
     }
 
     for (tools.tool_arr) |tool| {
-        if (hash_table.get(tool.hash) != null) {
+        if (hash_table.get(.{ .item = tool.hash }) != null) {
             return StdErr.DuplicateHash;
         }
-        hash_table.put(allocator, tool.hash, tool.name) catch {
+        hash_table.put(allocator, .{ .item = tool.hash }, tool.name) catch {
             return StdErr.MemoryAllocationFailed;
         };
     }
 
-    for (cantrips.cantrip_arr) |cantrip| {
-        if (hash_table.get(cantrip.hash) != null) {
+    for (spells.cantrips.cantrip_arr) |cantrip| {
+        if (hash_table.get(.{ .spell = cantrip.hash }) != null) {
             return StdErr.DuplicateHash;
         }
-        hash_table.put(allocator, cantrip.hash, cantrip.name) catch {
+        hash_table.put(allocator, .{ .spell = cantrip.hash }, cantrip.name) catch {
             return StdErr.MemoryAllocationFailed;
+        };
+    }
+
+    for (spells.level_1.level_1_spell_arr) |spell| {
+        if (hash_table.get(.{ .spell = spell.hash }) != null) {
+            const i: []const u8 = hash_table.get(.{ .spell = spell.hash }).?;
+            std.debug.print("{s} {} : {s} {}\n", .{ spell.name, spell.hash, i, hash(0, i) });
+            return StdErr.DuplicateHash;
+        }
+        hash_table.put(allocator, .{ .spell = spell.hash }, spell.name) catch {
+            return StdErr.DuplicateHash;
+        };
+    }
+    for (spells.level_2.level_2_spell_arr) |spell| {
+        if (hash_table.get(.{ .spell = spell.hash }) != null) {
+            return StdErr.DuplicateHash;
+        }
+        hash_table.put(allocator, .{ .spell = spell.hash }, spell.name) catch {
+            return StdErr.DuplicateHash;
+        };
+    }
+    for (spells.level_3.level_3_spell_arr) |spell| {
+        if (hash_table.get(.{ .spell = spell.hash }) != null) {
+            return StdErr.DuplicateHash;
+        }
+        hash_table.put(allocator, .{ .spell = spell.hash }, spell.name) catch {
+            return StdErr.DuplicateHash;
+        };
+    }
+    for (spells.level_4.level_4_spell_arr) |spell| {
+        if (hash_table.get(.{ .spell = spell.hash }) != null) {
+            return StdErr.DuplicateHash;
+        }
+        hash_table.put(allocator, .{ .spell = spell.hash }, spell.name) catch {
+            return StdErr.DuplicateHash;
+        };
+    }
+    for (spells.level_5.level_5_spell_arr) |spell| {
+        if (hash_table.get(.{ .spell = spell.hash }) != null) {
+            return StdErr.DuplicateHash;
+        }
+        hash_table.put(allocator, .{ .spell = spell.hash }, spell.name) catch {
+            return StdErr.DuplicateHash;
+        };
+    }
+    for (spells.level_6.level_6_spell_arr) |spell| {
+        if (hash_table.get(.{ .spell = spell.hash }) != null) {
+            return StdErr.DuplicateHash;
+        }
+        hash_table.put(allocator, .{ .spell = spell.hash }, spell.name) catch {
+            return StdErr.DuplicateHash;
+        };
+    }
+    for (spells.level_7.level_7_spell_arr) |spell| {
+        if (hash_table.get(.{ .spell = spell.hash }) != null) {
+            return StdErr.DuplicateHash;
+        }
+        hash_table.put(allocator, .{ .spell = spell.hash }, spell.name) catch {
+            return StdErr.DuplicateHash;
+        };
+    }
+    for (spells.level_8.level_8_spell_arr) |spell| {
+        if (hash_table.get(.{ .spell = spell.hash }) != null) {
+            return StdErr.DuplicateHash;
+        }
+        hash_table.put(allocator, .{ .spell = spell.hash }, spell.name) catch {
+            return StdErr.DuplicateHash;
+        };
+    }
+    for (spells.level_9.level_9_spell_arr) |spell| {
+        if (hash_table.get(.{ .spell = spell.hash }) != null) {
+            return StdErr.DuplicateHash;
+        }
+        hash_table.put(allocator, .{ .spell = spell.hash }, spell.name) catch {
+            return StdErr.DuplicateHash;
         };
     }
 }

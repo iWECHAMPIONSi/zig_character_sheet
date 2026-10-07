@@ -1,0 +1,10 @@
+pub const cantrips = @import("cantrips.zig");
+pub const level_1 = @import("level_1_spells.zig");
+pub const level_2 = @import("level_2_spells.zig");
+pub const level_3 = @import("level_3_spells.zig");
+pub const level_4 = @import("level_4_spells.zig");
+pub const level_5 = @import("level_5_spells.zig");
+pub const level_6 = @import("level_6_spells.zig");
+pub const level_7 = @import("level_7_spells.zig");
+pub const level_8 = @import("level_8_spells.zig");
+pub const level_9 = @import("level_9_spells.zig");
