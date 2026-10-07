@@ -162,7 +162,7 @@ pub const ToolType = enum {
     artisans,
     gaming_set,
     instrument,
-    none,
+    misc,
 };
 
 pub const ArmorCategory = enum {

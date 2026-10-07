@@ -93,23 +93,25 @@ pub const Container = struct {
 };
 
 pub const SmallContainer = struct {
-    contents: ?Item,
+    contents: ?*Item,
     valid_items: ?struct { items: bool, fluids: bool },
 };
 
 pub const FluidContainer = struct {
-    fluid: ?union(enum) { fluid: Item, potion: Item },
+    fluid: ?union(enum) { fluid: *Item, potion: *Item },
     volume_limit: ?VolumeValue,
     weight_full: ?WeightValue,
     volume_of_contents: ?VolumeValue, // how much of the fluid is inside, cannot exceed volume_limit if present
 };
 
 pub const Fluid = struct {
-    default_container: ?u64, // this is here both to have at least one field in the struct, and also because fluids cannot exist outside of a container naturally
+    default_container: ?u64,
+    weight: ?WeightValue,
 };
 
 pub const Potion = struct {
     default_container: ?u64,
+    weight: ?WeightValue,
 };
 
 /// these are so that the API can differientiate between Fluids and non Fluids
@@ -158,7 +160,7 @@ pub const ValidSmallItems = union(enum) {
 };
 
 // Fluid Weight System
-//
+// by default, API will first reference the fluid's listed weight, if the fluid does not have a listed weight, the API will fall back to the container's weight.
 
 ///
 pub const Item = struct {
@@ -192,7 +194,7 @@ pub const Item = struct {
     modifiers: ?[]modifier.Modifier,
     /// The sub-type of the Item
     category: ?Category,
-    /// The shop entry of the item, allows the item to be displayed by itself (this only applies to item beng listed by itself, not listed with another item as a wrapping_container)
+    /// The shop entry of the item, allows the item to be available for purchase in the shop by itself (this only applies to item beng listed by itself, not listed with another item as a wrapping_container)
     shop_entry: ?ShopEntry,
 
     const Self = @This();
@@ -201,8 +203,8 @@ pub const Item = struct {
         comptime name: []const u8,
         comptime source: enums.Source,
         comptime magic: bool,
-        comptime weight: WeightValue,
-        comptime volume: VolumeValue,
+        comptime weight: ?WeightValue,
+        comptime volume: ?VolumeValue,
         comptime length: ?DistanceValue,
         comptime value: ?CurrencyValue,
         comptime rarity: ?enums.Rarity,
@@ -218,8 +220,8 @@ pub const Item = struct {
             .hash = hash(0, name),
             .source = .{ .default_source = source },
             .magic = magic,
-            .weight = weight,
-            .volume = volume,
+            .weight = if (weight != null) weight.? else .{ .unit = .pound, .count = 0 },
+            .volume = if (volume != null) volume.? else .{ .unit = .ounce, .count = 0 },
             .length = length,
             .count = 1,
             .value = value,
@@ -229,11 +231,11 @@ pub const Item = struct {
             .dice_rolls = dice_rolls,
             .modifiers = modifiers,
             .category = category,
-            .shop_entry = if (shop_entry != null) |entry| ShopEntry.compInit(
+            .shop_entry = if (shop_entry != null) ShopEntry.compInit(
                 hash(0, name),
-                entry.cost,
-                entry.count,
-                entry.wrapping_container,
+                shop_entry.?.cost,
+                shop_entry.?.count,
+                shop_entry.?.wrapping_container,
             ) else null,
         };
     }
