@@ -1,6 +1,6 @@
-const std = @import("std");
 const items = @import("items.zig");
 const Item = items.Item;
+const weapons = @import("weapons.zig");
 
 // Adventuring gear definitions.
 // Data source: 2014 Player's Handbook equipment tables as represented by
@@ -941,7 +941,7 @@ pub const crossbow_bolt_case: Item = Item.compInit(
     null,
     null,
     null,
-    .{ .container = .{ .contents = null, .volume_limit = null, .cubic_volume_limit = null, .weight_limit = null, .item_limit = 20, .item_bias = &.{std.hash.Wyhash.hash(0, "Crossbow Bolt")}, .valid_items = .{ .items = true, .fluids = false }, .outside_slots = false } },
+    .{ .container = .{ .contents = null, .volume_limit = null, .cubic_volume_limit = null, .weight_limit = null, .item_limit = 20, .item_bias = &.{weapons.crossbow_bolt.hash}, .valid_items = .{ .items = true, .fluids = false }, .outside_slots = false } },
     .{ .cost = .{ .currency = .gold, .count = 1 }, .count = 1, .wrapping_container = null },
 );
 
@@ -958,7 +958,7 @@ pub const map_scroll_case: Item = Item.compInit(
     null,
     null,
     null,
-    .{ .container = .{ .contents = null, .volume_limit = null, .cubic_volume_limit = null, .weight_limit = null, .item_limit = 10, .item_bias = null, .valid_items = .{ .items = true, .fluids = false }, .outside_slots = false } },
+    .{ .container = .{ .contents = null, .volume_limit = null, .cubic_volume_limit = null, .weight_limit = null, .item_limit = 10, .item_bias = &.{ parchment.hash, paper.hash }, .valid_items = .{ .items = true, .fluids = false }, .outside_slots = false } },
     .{ .cost = .{ .currency = .gold, .count = 1 }, .count = 1, .wrapping_container = null },
 );
 
@@ -1060,7 +1060,7 @@ pub const quiver: Item = Item.compInit(
     null,
     null,
     null,
-    .{ .container = .{ .contents = null, .volume_limit = null, .cubic_volume_limit = null, .weight_limit = null, .item_limit = 20, .item_bias = &.{std.hash.Wyhash.hash(0, "Arrow")}, .valid_items = .{ .items = true, .fluids = false }, .outside_slots = false } },
+    .{ .container = .{ .contents = null, .volume_limit = null, .cubic_volume_limit = null, .weight_limit = null, .item_limit = 20, .item_bias = &.{weapons.arrow.hash}, .valid_items = .{ .items = true, .fluids = false }, .outside_slots = false } },
     .{ .cost = .{ .currency = .gold, .count = 1 }, .count = 1, .wrapping_container = null },
 );
 
@@ -1096,6 +1096,23 @@ pub const vial: Item = Item.compInit(
     null,
     .{ .fluid_container = .{ .fluid = null, .volume_limit = .{ .unit = .ounce, .count = 4.0 }, .weight_full = null, .volume_of_contents = null } },
     .{ .cost = .{ .currency = .gold, .count = 1 }, .count = 1, .wrapping_container = null },
+);
+
+pub const water: Item = Item.compInit(
+    "Water",
+    .phb14,
+    false,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    .{ .fluid = .{ .weight = null, .default_container = waterskin.hash } },
+    null,
 );
 
 pub const waterskin: Item = Item.compInit(
@@ -1592,7 +1609,7 @@ pub const arcane_wand: Item = Item.compInit(
 );
 
 pub const sprig_of_mistletoe: Item = Item.compInit(
-    "Druidic Focus - Sprig of Mistletoe",
+    "Sprig of Mistletoe",
     .phb14,
     false,
     null,
@@ -1609,7 +1626,7 @@ pub const sprig_of_mistletoe: Item = Item.compInit(
 );
 
 pub const druidic_totem: Item = Item.compInit(
-    "Druidic Focus - Totem",
+    "Totem",
     .phb14,
     false,
     null,
@@ -1626,7 +1643,7 @@ pub const druidic_totem: Item = Item.compInit(
 );
 
 pub const wooden_staff: Item = Item.compInit(
-    "Druidic Focus - Wooden Staff",
+    "Wooden Staff",
     .phb14,
     false,
     .{ .unit = .pound, .count = 4.0 },
@@ -1643,7 +1660,7 @@ pub const wooden_staff: Item = Item.compInit(
 );
 
 pub const yew_wand: Item = Item.compInit(
-    "Druidic Focus - Yew Wand",
+    "Yew Wand",
     .phb14,
     false,
     .{ .unit = .pound, .count = 1.0 },
@@ -1660,7 +1677,7 @@ pub const yew_wand: Item = Item.compInit(
 );
 
 pub const holy_amulet: Item = Item.compInit(
-    "Holy Symbol - Amulet",
+    "Amulet",
     .phb14,
     false,
     .{ .unit = .pound, .count = 1.0 },
@@ -1677,7 +1694,7 @@ pub const holy_amulet: Item = Item.compInit(
 );
 
 pub const holy_emblem: Item = Item.compInit(
-    "Holy Symbol - Emblem",
+    "Emblem",
     .phb14,
     false,
     null,
@@ -1694,7 +1711,7 @@ pub const holy_emblem: Item = Item.compInit(
 );
 
 pub const holy_reliquary: Item = Item.compInit(
-    "Holy Symbol - Reliquary",
+    "Reliquary",
     .phb14,
     false,
     .{ .unit = .pound, .count = 2.0 },
@@ -1827,6 +1844,7 @@ pub const item_arr = [_]Item{
     quiver,
     sack,
     vial,
+    water,
     waterskin,
     acid,
     alchemists_fire,
