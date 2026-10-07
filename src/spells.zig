@@ -33,7 +33,7 @@ pub const Duration = struct {
 };
 
 pub const HigherLevel = struct {
-    level: union { character: u8, slot: enums.SpellLevel },
+    level: union(enum) { character: u8, slot: enums.SpellLevel },
     desc: []const u8,
     dice_roll: ?Roll,
 };

@@ -87,8 +87,9 @@ pub const Container = struct {
     cubic_volume_limit: ?CubicVolumeValue,
     weight_limit: ?WeightValue,
     item_limit: ?i64,
-    item_bias: ?[]const u64,
+    item_bias: ?[]const u64, // Allows API to automatically assign items to this container (like arrows to quivers)
     valid_items: ?struct { items: bool, fluids: bool },
+    outside_slots: bool, // basically the workaround to the backpack problem, allows for the items it contains to surpass the limits (visually this will separate inner from outer storage)
 };
 
 pub const SmallContainer = struct {
@@ -100,10 +101,11 @@ pub const FluidContainer = struct {
     fluid: ?union(enum) { fluid: Item, potion: Item },
     volume_limit: ?VolumeValue,
     weight_full: ?WeightValue,
+    volume_of_contents: ?VolumeValue, // how much of the fluid is inside, cannot exceed volume_limit if present
 };
 
 pub const Fluid = struct {
-    default_container: ?u64,
+    default_container: ?u64, // this is here both to have at least one field in the struct, and also because fluids cannot exist outside of a container naturally
 };
 
 pub const Potion = struct {
@@ -144,24 +146,54 @@ pub const Category = union(enum) {
     tool: Tool,
 };
 
+pub const ValidSmallItems = union(enum) {
+    melee_weapon: MeleeWeapon,
+    ranged_weapon: RangedWeapon,
+    armor: Armor,
+    shield: Shield,
+    fluid_container: FluidContainer,
+    fluid: Fluid,
+    potion: Potion,
+    tool: Tool,
+};
+
+// Fluid Weight System
+//
+
+///
 pub const Item = struct {
+    /// Name of the Item
     name: []const u8,
+    /// hash of the Item (based on its name, case sensitive)
     hash: u64,
-    source: enums.Source,
+    /// source material, custom_source is only relevant for anything not in the enum, although the enum is prefered
+    source: union(enum) { default_source: enums.Source, custom_source: []const u8 },
+    /// if the item is magical
     magic: bool,
-    weight: ?WeightValue,
-    volume: ?VolumeValue,
+    /// weight of the item
+    weight: WeightValue,
+    /// volume of the item
+    volume: VolumeValue,
+    /// length of the item (if applicable)
     length: ?DistanceValue,
+    /// how many of the item in the current stack (applies to copies only)
     count: u64,
+    /// how much it costs (if any)
     value: ?CurrencyValue,
+    /// how rare it is (applies to magical items only)
     rarity: ?enums.Rarity,
+    /// details
     details: ?[]const u8,
+    /// description
     desc: ?[]const u8,
+    /// The dice rolls (look at modifier.zig for type)
     dice_rolls: ?[]modifier.DiceRoll,
+    /// The modifiers (look at modifier.zig for type)
     modifiers: ?[]modifier.Modifier,
+    /// The sub-type of the Item
     category: ?Category,
+    /// The shop entry of the item, allows the item to be displayed by itself (this only applies to item beng listed by itself, not listed with another item as a wrapping_container)
     shop_entry: ?ShopEntry,
-    default_container: ?u64,
 
     const Self = @This();
 
@@ -169,8 +201,8 @@ pub const Item = struct {
         comptime name: []const u8,
         comptime source: enums.Source,
         comptime magic: bool,
-        comptime weight: ?WeightValue,
-        comptime volume: ?VolumeValue,
+        comptime weight: WeightValue,
+        comptime volume: VolumeValue,
         comptime length: ?DistanceValue,
         comptime value: ?CurrencyValue,
         comptime rarity: ?enums.Rarity,
@@ -179,12 +211,12 @@ pub const Item = struct {
         comptime dice_rolls: ?[]modifier.DiceRoll,
         comptime modifiers: ?[]modifier.Modifier,
         comptime category: ?Category,
-        comptime shop_entry: ?struct { cost: CurrencyValue, count: u64, wrapping_contaner: ?u64 },
+        comptime shop_entry: ?struct { cost: CurrencyValue, count: u64, wrapping_container: ?u64 },
     ) Self {
         return .{
             .name = name,
             .hash = hash(0, name),
-            .source = source,
+            .source = .{ .default_source = source },
             .magic = magic,
             .weight = weight,
             .volume = volume,
@@ -201,7 +233,7 @@ pub const Item = struct {
                 hash(0, name),
                 entry.cost,
                 entry.count,
-                entry.wrapping_contaner,
+                entry.wrapping_container,
             ) else null,
         };
     }
