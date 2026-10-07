@@ -70,12 +70,12 @@ pub fn startupValidation(allocator: std.mem.Allocator) StdErr!void {
         };
     }
 
-    // for (cantrips.cantrip_arr) |cantrip| {
-    // if (hash_table.get(cantrip.hash) != null) {
-    // return StdErr.DuplicateHash;
-    // }
-    // hash_table.put(allocator, cantrip.hash, cantrip.name) catch {
-    // return StdErr.MemoryAllocationFailed;
-    // };
-    // }
+    for (cantrips.cantrip_arr) |cantrip| {
+        if (hash_table.get(cantrip.hash) != null) {
+            return StdErr.DuplicateHash;
+        }
+        hash_table.put(allocator, cantrip.hash, cantrip.name) catch {
+            return StdErr.MemoryAllocationFailed;
+        };
+    }
 }

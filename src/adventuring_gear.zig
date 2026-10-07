@@ -1,6 +1,7 @@
 const items = @import("items.zig");
 const Item = items.Item;
-const Description = items.Description;
+const description = @import("description.zig");
+const Description = description.Description;
 
 const rope_desc: Description = .{
     .desc = "A fifty-foot length of rope.",

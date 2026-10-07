@@ -20,7 +20,7 @@ pub const Modifier = struct {
 };
 
 pub const DiceRoll = struct {
-    roll: ?[]DiceModRoll,
+    roll: ?[]const DiceModRoll,
 };
 
 pub const DiceModRoll = struct {
