@@ -828,7 +828,21 @@ pub const lance: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     null,
-    "Attacks against creatures within 5 feet have disadvantage. A lance requires two hands while its wielder is not mounted.",
+    .{
+        .desc = "A reach weapon with special handling rules.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Close Targets",
+                .desc = "Attacks against targets within 5 feet are made with disadvantage.",
+            },
+            .{
+                .table = null,
+                .heading = "Mounted Use",
+                .desc = "The lance requires two hands while its wielder is not mounted.",
+            },
+        },
+    },
     null,
     null,
     .{
@@ -1416,7 +1430,32 @@ pub const net: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     null,
-    "A hit restrains an eligible Large-or-smaller creature until it is freed or the net is destroyed. Attacking with a net limits that action, bonus action, or reaction to one attack.",
+    .{
+        .desc = "A net can restrain a creature it hits.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Valid Targets",
+                .desc = "The net affects Large or smaller creatures. It has no effect on formless creatures or creatures that are Huge or larger.",
+            },
+            .{
+                .table = .{
+                    .headings = &.{ "Method", "Requirement" },
+                    .table_entry = &.{
+                        &.{ .{ .str = "Strength Check" }, .{ .str = "DC 10" } },
+                        &.{ .{ .str = "Slashing Damage" }, .{ .str = "5 damage against AC 10" } },
+                    },
+                },
+                .heading = "Escape",
+                .desc = "A restrained creature can be freed by a successful Strength check, or by destroying the net with slashing damage.",
+            },
+            .{
+                .table = null,
+                .heading = "Attack Limit",
+                .desc = "When an action, bonus action, or reaction is used to attack with a net, only one attack can be made as part of that action, bonus action, or reaction.",
+            },
+        },
+    },
     null,
     null,
     .{
@@ -1494,7 +1533,27 @@ pub const hoopak: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     null,
-    "The melee mode deals piercing damage. It can alternatively be used as a martial ranged weapon with sling bullets, a 40/160-foot range, and 1d4 bludgeoning damage; its ammunition property is ignored for melee attacks.",
+    .{
+        .desc = "A sturdy stick with a sling at one end and a pointed tip at the other.",
+        .desc_fields = &.{
+            .{
+                .table = .{
+                    .headings = &.{ "Mode", "Damage", "Range", "Ammunition" },
+                    .table_entry = &.{
+                        &.{ .{ .str = "Melee" }, .{ .str = "1d6 piercing" }, .{ .str = "Melee" }, .{ .str = "None" } },
+                        &.{ .{ .str = "Ranged" }, .{ .str = "1d4 bludgeoning" }, .{ .str = "40/160 ft" }, .{ .str = "Sling Bullet" } },
+                    },
+                },
+                .heading = "Attack Modes",
+                .desc = null,
+            },
+            .{
+                .table = null,
+                .heading = "Melee Use",
+                .desc = "The hoopak's ammunition property is ignored when making melee attacks with it.",
+            },
+        },
+    },
     null,
     null,
     .{
@@ -1530,7 +1589,16 @@ pub const double_bladed_scimitar: Item = Item.compInit(
     .{ .currency = .gold, .count = 100 },
     null,
     null,
-    "After attacking with this weapon as part of the Attack action, its wielder can make a bonus-action melee attack with the opposite end; that attack deals 1d4 slashing damage.",
+    .{
+        .desc = "A two-handed, double-ended martial weapon.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Bonus Attack",
+                .desc = "After attacking with the weapon as part of the Attack action, the wielder can immediately use a bonus action to make another melee attack with the opposite end. That attack deals 1d4 slashing damage instead of the weapon's normal 2d4.",
+            },
+        },
+    },
     null,
     null,
     .{

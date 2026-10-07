@@ -1,5 +1,115 @@
 const items = @import("items.zig");
 const Item = items.Item;
+const Description = items.Description;
+
+const artisan_tool_desc: Description = .{
+    .desc = "A specialized set of implements used to practice a particular craft or trade.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Proficiency",
+            .desc = "Proficiency applies to ability checks made using this specific craft's tools. Each kind of artisan's tools is a separate proficiency.",
+        },
+    },
+};
+
+const gaming_set_desc: Description = .{
+    .desc = "A set of pieces, cards, dice, or similar objects used to play a particular game.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Proficiency",
+            .desc = "Proficiency applies to ability checks made to play that specific game. Each kind of gaming set is a separate proficiency.",
+        },
+    },
+};
+
+const instrument_desc: Description = .{
+    .desc = "A musical instrument used to perform music.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Proficiency",
+            .desc = "Each kind of musical instrument is a separate proficiency.",
+        },
+        .{
+            .table = null,
+            .heading = "Spellcasting Focus",
+            .desc = "A bard can use a musical instrument as a spellcasting focus.",
+        },
+    },
+};
+
+const disguise_kit_desc: Description = .{
+    .desc = "A pouch containing cosmetics, hair dye, and small props used to alter a creature's visible appearance.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Proficiency",
+            .desc = "Proficiency applies to ability checks made to create a visual disguise.",
+        },
+    },
+};
+
+const forgery_kit_desc: Description = .{
+    .desc = "A collection of papers, inks, seals, waxes, metal leaf, and other supplies used to create convincing physical document forgeries.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Proficiency",
+            .desc = "Proficiency applies to ability checks made to create physical document forgeries.",
+        },
+    },
+};
+
+const herbalism_kit_desc: Description = .{
+    .desc = "A collection of instruments, containers, and supplies used to identify and prepare herbs, remedies, and potions.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Proficiency",
+            .desc = "Proficiency applies to ability checks made to identify or apply herbs.",
+        },
+        .{
+            .table = null,
+            .heading = "Crafting",
+            .desc = "Proficiency with an herbalism kit is required to create antitoxin and potions of healing.",
+        },
+    },
+};
+
+const navigators_tools_desc: Description = .{
+    .desc = "A set of instruments used for navigation at sea.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Proficiency",
+            .desc = "Proficiency can be used to chart a ship's course, follow navigation charts, and make checks to avoid becoming lost at sea.",
+        },
+    },
+};
+
+const poisoners_kit_desc: Description = .{
+    .desc = "Vials, chemicals, and other equipment used to create and handle poisons.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Proficiency",
+            .desc = "Proficiency applies to ability checks made to craft or use poisons.",
+        },
+    },
+};
+
+const thieves_tools_desc: Description = .{
+    .desc = "A set containing a small file, lock picks, a handled mirror, narrow-bladed scissors, and pliers.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Proficiency",
+            .desc = "Proficiency applies to ability checks made to disarm traps or open locks.",
+        },
+    },
+};
 
 // PHB 2014 tool table. Xanathar's Guide expands tool uses, but these
 // definitions use the PHB item identities, prices, and weights.
@@ -14,7 +124,7 @@ pub const alchemists_supplies: Item = Item.compInit(
     .{ .currency = .gold, .count = 50 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -31,7 +141,7 @@ pub const brewers_supplies: Item = Item.compInit(
     .{ .currency = .gold, .count = 20 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -48,7 +158,7 @@ pub const calligraphers_supplies: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -65,7 +175,7 @@ pub const carpenters_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 8 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -82,7 +192,7 @@ pub const cartographers_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 15 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -99,7 +209,7 @@ pub const cobblers_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -116,7 +226,7 @@ pub const cooks_utensils: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -133,7 +243,7 @@ pub const glassblowers_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 30 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -150,7 +260,7 @@ pub const jewelers_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 25 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -167,7 +277,7 @@ pub const leatherworkers_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -184,7 +294,7 @@ pub const masons_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -201,7 +311,7 @@ pub const painters_supplies: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -218,7 +328,7 @@ pub const potters_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -235,7 +345,7 @@ pub const smiths_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 20 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -252,7 +362,7 @@ pub const tinkers_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 50 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -269,7 +379,7 @@ pub const weavers_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -286,7 +396,7 @@ pub const woodcarvers_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     null,
-    null,
+    artisan_tool_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .artisans } },
@@ -303,7 +413,7 @@ pub const dice_set: Item = Item.compInit(
     .{ .currency = .silver, .count = 1 },
     null,
     null,
-    null,
+    gaming_set_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .gaming_set } },
@@ -320,7 +430,7 @@ pub const dragonchess_set: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     null,
-    null,
+    gaming_set_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .gaming_set } },
@@ -337,7 +447,7 @@ pub const playing_card_set: Item = Item.compInit(
     .{ .currency = .silver, .count = 5 },
     null,
     null,
-    null,
+    gaming_set_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .gaming_set } },
@@ -354,7 +464,7 @@ pub const three_dragon_ante_set: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     null,
-    null,
+    gaming_set_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .gaming_set } },
@@ -371,7 +481,7 @@ pub const bagpipes: Item = Item.compInit(
     .{ .currency = .gold, .count = 30 },
     null,
     null,
-    null,
+    instrument_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .instrument } },
@@ -388,7 +498,7 @@ pub const drum: Item = Item.compInit(
     .{ .currency = .gold, .count = 6 },
     null,
     null,
-    null,
+    instrument_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .instrument } },
@@ -405,7 +515,7 @@ pub const dulcimer: Item = Item.compInit(
     .{ .currency = .gold, .count = 25 },
     null,
     null,
-    null,
+    instrument_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .instrument } },
@@ -422,7 +532,7 @@ pub const flute: Item = Item.compInit(
     .{ .currency = .gold, .count = 2 },
     null,
     null,
-    null,
+    instrument_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .instrument } },
@@ -439,7 +549,7 @@ pub const lute: Item = Item.compInit(
     .{ .currency = .gold, .count = 35 },
     null,
     null,
-    null,
+    instrument_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .instrument } },
@@ -456,7 +566,7 @@ pub const lyre: Item = Item.compInit(
     .{ .currency = .gold, .count = 30 },
     null,
     null,
-    null,
+    instrument_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .instrument } },
@@ -473,7 +583,7 @@ pub const horn: Item = Item.compInit(
     .{ .currency = .gold, .count = 3 },
     null,
     null,
-    null,
+    instrument_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .instrument } },
@@ -490,7 +600,7 @@ pub const pan_flute: Item = Item.compInit(
     .{ .currency = .gold, .count = 12 },
     null,
     null,
-    null,
+    instrument_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .instrument } },
@@ -507,7 +617,7 @@ pub const shawm: Item = Item.compInit(
     .{ .currency = .gold, .count = 2 },
     null,
     null,
-    null,
+    instrument_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .instrument } },
@@ -524,7 +634,7 @@ pub const viol: Item = Item.compInit(
     .{ .currency = .gold, .count = 30 },
     null,
     null,
-    null,
+    instrument_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .instrument } },
@@ -541,7 +651,7 @@ pub const disguise_kit: Item = Item.compInit(
     .{ .currency = .gold, .count = 25 },
     null,
     null,
-    null,
+    disguise_kit_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .misc } },
@@ -558,7 +668,7 @@ pub const forgery_kit: Item = Item.compInit(
     .{ .currency = .gold, .count = 15 },
     null,
     null,
-    null,
+    forgery_kit_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .misc } },
@@ -575,7 +685,7 @@ pub const herbalism_kit: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     null,
-    null,
+    herbalism_kit_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .misc } },
@@ -592,7 +702,7 @@ pub const navigators_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 25 },
     null,
     null,
-    null,
+    navigators_tools_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .misc } },
@@ -609,7 +719,7 @@ pub const poisoners_kit: Item = Item.compInit(
     .{ .currency = .gold, .count = 50 },
     null,
     null,
-    null,
+    poisoners_kit_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .misc } },
@@ -626,7 +736,7 @@ pub const thieves_tools: Item = Item.compInit(
     .{ .currency = .gold, .count = 25 },
     null,
     null,
-    null,
+    thieves_tools_desc,
     null,
     null,
     .{ .tool = .{ .tool_type = .misc } },

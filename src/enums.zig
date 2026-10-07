@@ -21,6 +21,14 @@ pub const Skill = enum {
     survival,
 };
 
+pub const Size = enum {
+    tiny,
+    small,
+    medium,
+    large,
+    huge,
+};
+
 pub const Ability = enum {
     strength,
     dexterity,

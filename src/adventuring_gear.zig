@@ -1,5 +1,57 @@
 const items = @import("items.zig");
 const Item = items.Item;
+const Description = items.Description;
+
+const rope_desc: Description = .{
+    .desc = "A fifty-foot length of rope.",
+    .desc_fields = &.{
+        .{
+            .table = .{
+                .headings = &.{ "Property", "Value" },
+                .table_entry = &.{
+                    &.{ .{ .str = "Hit Points" }, .{ .int = 2 } },
+                    &.{ .{ .str = "Burst Strength DC" }, .{ .int = 17 } },
+                },
+            },
+            .heading = "Durability",
+            .desc = null,
+        },
+    },
+};
+
+const arcane_focus_desc: Description = .{
+    .desc = "A specially constructed object used to channel arcane magic.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Spellcasting Focus",
+            .desc = "A sorcerer, warlock, or wizard can use this item as a spellcasting focus.",
+        },
+    },
+};
+
+const druidic_focus_desc: Description = .{
+    .desc = "A natural or sacred object used to channel druidic magic.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Spellcasting Focus",
+            .desc = "A druid can use this item as a spellcasting focus.",
+        },
+    },
+};
+
+const holy_symbol_desc: Description = .{
+    .desc = "A representation of a god or pantheon.",
+    .desc_fields = &.{
+        .{
+            .table = null,
+            .heading = "Spellcasting Focus",
+            .desc = "A cleric or paladin can use the symbol as a spellcasting focus. To do so, the caster must hold it, wear it visibly, or bear it on a shield.",
+        },
+    },
+};
+
 const weapons = @import("weapons.zig");
 
 // Adventuring gear definitions.
@@ -20,7 +72,7 @@ pub const string_10_ft: Item = Item.compInit(
     null,
     null,
     null,
-    "A ten-foot length of string.",
+    .{ .desc = "A ten-foot length of string.", .desc_fields = null },
     null,
     null,
     null,
@@ -37,7 +89,7 @@ pub const alms_box: Item = Item.compInit(
     null,
     null,
     null,
-    "A small box intended for collecting alms.",
+    .{ .desc = "A small box intended for collecting alms.", .desc_fields = null },
     null,
     null,
     null,
@@ -54,7 +106,7 @@ pub const incense_block: Item = Item.compInit(
     null,
     null,
     null,
-    "A block of incense.",
+    .{ .desc = "A block of incense.", .desc_fields = null },
     null,
     null,
     null,
@@ -71,7 +123,7 @@ pub const censer: Item = Item.compInit(
     null,
     null,
     null,
-    "A vessel used for burning incense.",
+    .{ .desc = "A vessel used for burning incense.", .desc_fields = null },
     null,
     null,
     null,
@@ -88,7 +140,7 @@ pub const vestments: Item = Item.compInit(
     null,
     null,
     null,
-    "Religious vestments.",
+    .{ .desc = "Religious vestments.", .desc_fields = null },
     null,
     null,
     null,
@@ -105,7 +157,7 @@ pub const small_bag_of_sand: Item = Item.compInit(
     null,
     null,
     null,
-    "A small bag containing sand.",
+    .{ .desc = "A small bag containing sand.", .desc_fields = null },
     null,
     null,
     null,
@@ -122,7 +174,7 @@ pub const small_knife: Item = Item.compInit(
     null,
     null,
     null,
-    "A small utility knife.",
+    .{ .desc = "A small utility knife.", .desc_fields = null },
     null,
     null,
     null,
@@ -139,7 +191,7 @@ pub const abacus: Item = Item.compInit(
     .{ .currency = .gold, .count = 2 },
     null,
     null,
-    "A counting frame.",
+    .{ .desc = "A counting frame.", .desc_fields = null },
     null,
     null,
     null,
@@ -207,7 +259,16 @@ pub const block_and_tackle: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     null,
-    "A pulley-and-cable set that increases lifting leverage.",
+    .{
+        .desc = "A pulley-and-cable lifting rig with a hook for attaching to objects.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Hoisting",
+                .desc = "The rig allows its user to hoist up to four times the weight they could normally lift.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -224,7 +285,7 @@ pub const book: Item = Item.compInit(
     .{ .currency = .gold, .count = 25 },
     null,
     null,
-    "A bound book containing text, illustrations, notes, or other written material.",
+    .{ .desc = "A bound book containing text, illustrations, notes, or other written material.", .desc_fields = null },
     null,
     null,
     null,
@@ -241,7 +302,16 @@ pub const candle: Item = Item.compInit(
     .{ .currency = .copper, .count = 1 },
     null,
     null,
-    "Burns for about 1 hour and provides a small area of light.",
+    .{
+        .desc = null,
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Light",
+                .desc = "Burns for 1 hour, shedding bright light in a 5-foot radius and dim light for another 5 feet.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -258,7 +328,22 @@ pub const chain_10_ft: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     null,
-    "A ten-foot chain; it has 10 hit points and can be burst with a difficult Strength check.",
+    .{
+        .desc = "A ten-foot length of chain.",
+        .desc_fields = &.{
+            .{
+                .table = .{
+                    .headings = &.{ "Property", "Value" },
+                    .table_entry = &.{
+                        &.{ .{ .str = "Hit Points" }, .{ .int = 10 } },
+                        &.{ .{ .str = "Burst Strength DC" }, .{ .int = 20 } },
+                    },
+                },
+                .heading = "Durability",
+                .desc = null,
+            },
+        },
+    },
     null,
     null,
     null,
@@ -292,7 +377,16 @@ pub const component_pouch: Item = Item.compInit(
     .{ .currency = .gold, .count = 25 },
     null,
     null,
-    "A compartmentalized, watertight belt pouch for spell components that do not have a specified cost.",
+    .{
+        .desc = "A small, watertight, compartmentalized belt pouch for spellcasting materials.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Spell Components",
+                .desc = "It can hold material components and similar spellcasting items, except components that have a specific listed cost.",
+            },
+        },
+    },
     null,
     null,
     .{ .small_container = .{ .contents = null, .valid_items = .{ .items = true, .fluids = false } } },
@@ -309,7 +403,7 @@ pub const fishing_tackle: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     null,
-    "A kit with a rod, line, hooks, sinkers, floats, lures, and narrow netting.",
+    .{ .desc = "A kit with a rod, line, hooks, sinkers, floats, lures, and narrow netting.", .desc_fields = null },
     null,
     null,
     null,
@@ -377,7 +471,7 @@ pub const ink_bottle_1_oz: Item = Item.compInit(
     null,
     null,
     null,
-    "A small bottle sized to hold one ounce of ink.",
+    .{ .desc = "A small bottle sized to hold one ounce of ink.", .desc_fields = null },
     null,
     null,
     .{ .fluid_container = .{ .fluid = null, .volume_limit = .{ .unit = .ounce, .count = 1 }, .weight_full = null, .volume_of_contents = null } },
@@ -445,7 +539,26 @@ pub const lock: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     null,
-    "Supplied with a key; a typical lock can be picked with thieves' tools at a moderate difficulty.",
+    .{
+        .desc = "A lock supplied with a matching key.",
+        .desc_fields = &.{
+            .{
+                .table = .{
+                    .headings = &.{ "Check", "DC" },
+                    .table_entry = &.{
+                        &.{ .{ .str = "Dexterity (Thieves' Tools)" }, .{ .int = 15 } },
+                    },
+                },
+                .heading = "Picking the Lock",
+                .desc = null,
+            },
+            .{
+                .table = null,
+                .heading = "Variants",
+                .desc = "More expensive or difficult locks can exist at the DM's discretion.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -462,7 +575,21 @@ pub const magnifying_glass: Item = Item.compInit(
     .{ .currency = .gold, .count = 100 },
     null,
     null,
-    "A lens for inspecting small details and, in strong sunlight, focusing light to start a fire.",
+    .{
+        .desc = "A lens for inspecting small or highly detailed objects.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Inspection",
+                .desc = "Using it to appraise or inspect a small or highly detailed object grants advantage on the relevant ability check.",
+            },
+            .{
+                .table = null,
+                .heading = "Starting Fires",
+                .desc = "In light as bright as sunlight, it can focus light onto tinder. Igniting a fire this way takes about 5 minutes.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -479,7 +606,33 @@ pub const manacles: Item = Item.compInit(
     .{ .currency = .gold, .count = 2 },
     null,
     null,
-    "Metal restraints with a key; escaping, breaking, or picking them requires a difficult check.",
+    .{
+        .desc = "Metal restraints sized to bind a Small or Medium creature.",
+        .desc_fields = &.{
+            .{
+                .table = .{
+                    .headings = &.{ "Action", "Check", "DC" },
+                    .table_entry = &.{
+                        &.{ .{ .str = "Escape" }, .{ .str = "Dexterity" }, .{ .int = 20 } },
+                        &.{ .{ .str = "Break" }, .{ .str = "Strength" }, .{ .int = 20 } },
+                        &.{ .{ .str = "Pick Lock" }, .{ .str = "Dexterity (Thieves' Tools)" }, .{ .int = 15 } },
+                    },
+                },
+                .heading = "Checks",
+                .desc = null,
+            },
+            .{
+                .table = null,
+                .heading = "Durability",
+                .desc = "A set of manacles has 15 hit points.",
+            },
+            .{
+                .table = null,
+                .heading = "Key",
+                .desc = "Each set is supplied with one key.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -496,7 +649,7 @@ pub const mess_kit: Item = Item.compInit(
     .{ .currency = .silver, .count = 2 },
     null,
     null,
-    "A compact tin eating set whose two halves can serve as cookware and dishes.",
+    .{ .desc = "A compact tin eating set whose two halves can serve as cookware and dishes.", .desc_fields = null },
     null,
     null,
     null,
@@ -632,7 +785,21 @@ pub const portable_ram: Item = Item.compInit(
     .{ .currency = .gold, .count = 4 },
     null,
     null,
-    "Provides leverage when breaking down doors; another creature can assist its use.",
+    .{
+        .desc = "A heavy portable ram intended for forcing open doors.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Breaking Doors",
+                .desc = "Using the ram grants a +4 bonus to the Strength check.",
+            },
+            .{
+                .table = null,
+                .heading = "Assistance",
+                .desc = "One other creature can help operate the ram, granting advantage on the check.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -649,7 +816,7 @@ pub const ration: Item = Item.compInit(
     .{ .currency = .silver, .count = 5 },
     null,
     null,
-    "Dry, travel-stable food sufficient for one day.",
+    .{ .desc = "Dry, travel-stable food sufficient for one day.", .desc_fields = null },
     null,
     null,
     null,
@@ -666,7 +833,7 @@ pub const hempen_rope_50_ft: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     null,
-    "Fifty feet of hemp rope.",
+    rope_desc,
     null,
     null,
     null,
@@ -683,7 +850,7 @@ pub const silk_rope_50_ft: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     null,
-    "Fifty feet of silk rope.",
+    rope_desc,
     null,
     null,
     null,
@@ -785,7 +952,7 @@ pub const spellbook: Item = Item.compInit(
     .{ .currency = .gold, .count = 50 },
     null,
     null,
-    "A leather-bound tome with 100 blank vellum pages suitable for recording spells.",
+    .{ .desc = "A leather-bound tome with 100 blank vellum pages suitable for recording spells.", .desc_fields = null },
     null,
     null,
     null,
@@ -819,7 +986,7 @@ pub const spyglass: Item = Item.compInit(
     .{ .currency = .gold, .count = 1000 },
     null,
     null,
-    "Magnifies viewed objects to about twice their apparent size.",
+    .{ .desc = "Magnifies viewed objects to about twice their apparent size.", .desc_fields = null },
     null,
     null,
     null,
@@ -1142,7 +1309,21 @@ pub const acid: Item = Item.compInit(
     .{ .currency = .gold, .count = 25 },
     null,
     null,
-    "Can be splashed or thrown as an improvised ranged weapon; on a hit it deals 2d6 acid damage.",
+    .{
+        .desc = "A vial of corrosive acid.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Use",
+                .desc = "As an action, the acid can be splashed onto a creature within 5 feet or thrown up to 20 feet. A thrown or splashed attack is treated as an improvised ranged weapon attack against a creature or object.",
+            },
+            .{
+                .table = null,
+                .heading = "On Hit",
+                .desc = "The target takes 2d6 acid damage.",
+            },
+        },
+    },
     null,
     null,
     .{ .fluid = .{ .default_container = vial.hash, .weight = .{ .unit = .pound, .count = 1.0 } } },
@@ -1159,7 +1340,26 @@ pub const alchemists_fire: Item = Item.compInit(
     .{ .currency = .gold, .count = 50 },
     null,
     null,
-    "A sticky liquid that ignites on exposure to air and can be thrown; a hit causes ongoing fire until extinguished.",
+    .{
+        .desc = "A sticky fluid that ignites when exposed to air.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Use",
+                .desc = "As an action, the flask can be thrown up to 20 feet as an improvised ranged weapon attack against a creature or object.",
+            },
+            .{
+                .table = null,
+                .heading = "On Hit",
+                .desc = "The target takes 1d4 fire damage at the start of each of its turns.",
+            },
+            .{
+                .table = null,
+                .heading = "Extinguish",
+                .desc = "A creature can use its action to make a DC 10 Dexterity check to extinguish the flames.",
+            },
+        },
+    },
     null,
     null,
     .{ .fluid = .{ .default_container = flask.hash, .weight = .{ .unit = .pound, .count = 1.0 } } },
@@ -1176,7 +1376,21 @@ pub const antitoxin: Item = Item.compInit(
     .{ .currency = .gold, .count = 50 },
     null,
     null,
-    "Drinking it grants temporary advantage on saving throws against poison, except for undead and constructs.",
+    .{
+        .desc = "A vial of liquid used to resist poison.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Effect",
+                .desc = "For 1 hour after drinking it, the creature has advantage on saving throws against poison.",
+            },
+            .{
+                .table = null,
+                .heading = "Exceptions",
+                .desc = "The antitoxin provides no benefit to undead or constructs.",
+            },
+        },
+    },
     null,
     null,
     .{ .fluid = .{ .default_container = vial.hash, .weight = null } },
@@ -1193,7 +1407,26 @@ pub const ball_bearing: Item = Item.compInit(
     null,
     null,
     null,
-    "A single steel ball bearing. The standard shop bundle contains 1,000 in a pouch.",
+    .{
+        .desc = "A single steel ball bearing. The standard shop bundle contains 1,000 in a pouch.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Deploy (1,000 Bearings)",
+                .desc = "As an action, a full bag can be spilled over a level 10-foot-square area.",
+            },
+            .{
+                .table = null,
+                .heading = "Effect",
+                .desc = "A creature moving across the area must succeed on a DC 10 Dexterity saving throw or fall prone.",
+            },
+            .{
+                .table = null,
+                .heading = "Careful Movement",
+                .desc = "A creature moving through the area at half speed does not need to make the saving throw.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1210,7 +1443,26 @@ pub const caltrop: Item = Item.compInit(
     null,
     null,
     null,
-    "A single caltrop. The standard shop bundle contains 20 in a pouch.",
+    .{
+        .desc = "A single caltrop. The standard shop bundle contains 20 in a pouch.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Deploy (20 Caltrops)",
+                .desc = "As an action, a full bag can be spread over a 5-foot-square area.",
+            },
+            .{
+                .table = null,
+                .heading = "Effect",
+                .desc = "A creature entering the area must succeed on a DC 15 Dexterity saving throw or stop moving and take 1 piercing damage. Its walking speed is reduced by 10 feet until it regains at least 1 hit point.",
+            },
+            .{
+                .table = null,
+                .heading = "Careful Movement",
+                .desc = "A creature moving through the area at half speed does not need to make the saving throw.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1227,7 +1479,16 @@ pub const climbers_kit: Item = Item.compInit(
     .{ .currency = .gold, .count = 25 },
     null,
     null,
-    "Includes specialized pitons, boot tips, gloves, and a harness for anchoring a climber.",
+    .{
+        .desc = "A kit containing specialized pitons, boot tips, gloves, and a harness.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Anchor",
+                .desc = "As an action, the user can anchor themself. While anchored, they cannot fall more than 25 feet from the anchor point and cannot climb more than 25 feet away without undoing the anchor.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1244,7 +1505,16 @@ pub const crowbar: Item = Item.compInit(
     .{ .currency = .gold, .count = 2 },
     null,
     null,
-    "Provides advantage on Strength checks when its leverage can be applied.",
+    .{
+        .desc = "A sturdy lever used to pry or force objects.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Leverage",
+                .desc = "When the crowbar's leverage can be applied, it grants advantage on the relevant Strength check.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1261,7 +1531,21 @@ pub const healers_kit: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     null,
-    "A ten-use kit of bandages, salves, and splints; a use can stabilize a creature at 0 hit points.",
+    .{
+        .desc = "A leather pouch containing bandages, salves, and splints.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Uses",
+                .desc = "The kit has 10 uses.",
+            },
+            .{
+                .table = null,
+                .heading = "Stabilize",
+                .desc = "As an action, one use can be expended to stabilize a creature at 0 hit points without requiring a Wisdom (Medicine) check.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1278,7 +1562,26 @@ pub const holy_water: Item = Item.compInit(
     .{ .currency = .gold, .count = 25 },
     null,
     null,
-    "Can be splashed or thrown; it deals radiant damage to fiends and undead.",
+    .{
+        .desc = "A flask of consecrated water.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Use",
+                .desc = "As an action, it can be splashed onto a creature within 5 feet or thrown up to 20 feet as an improvised ranged weapon attack.",
+            },
+            .{
+                .table = null,
+                .heading = "Damage",
+                .desc = "A fiend or undead hit by the holy water takes 2d6 radiant damage.",
+            },
+            .{
+                .table = null,
+                .heading = "Creation",
+                .desc = "A cleric or paladin can create holy water with a 1-hour ritual that consumes 25 gp of powdered silver and a 1st-level spell slot.",
+            },
+        },
+    },
     null,
     null,
     .{ .fluid = .{ .default_container = flask.hash, .weight = .{ .unit = .pound, .count = 1.0 } } },
@@ -1295,7 +1598,31 @@ pub const hunting_trap: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     null,
-    "A chained, pressure-triggered steel trap that can injure and restrain a creature until it escapes.",
+    .{
+        .desc = "A chained, pressure-triggered steel trap.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Set",
+                .desc = "Using an action sets the trap and secures its chain to an immobile object.",
+            },
+            .{
+                .table = null,
+                .heading = "Trigger",
+                .desc = "A creature stepping on the pressure plate must make a DC 13 Dexterity saving throw. On a failure it takes 1d4 piercing damage and stops moving.",
+            },
+            .{
+                .table = null,
+                .heading = "Restrained Movement",
+                .desc = "Until freed, the creature's movement is limited by the trap's chain, typically to about 3 feet.",
+            },
+            .{
+                .table = null,
+                .heading = "Escape",
+                .desc = "A creature can use its action to make a DC 13 Strength check to free itself or another creature within reach. Each failed attempt deals 1 piercing damage to the trapped creature.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1312,7 +1639,27 @@ pub const lamp: Item = Item.compInit(
     .{ .currency = .silver, .count = 5 },
     null,
     null,
-    "Burns oil for about 6 hours, producing bright light nearby and dim light farther out.",
+    .{
+        .desc = "An oil-burning lamp.",
+        .desc_fields = &.{
+            .{
+                .table = .{
+                    .headings = &.{ "Light", "Distance" },
+                    .table_entry = &.{
+                        &.{ .{ .str = "Bright" }, .{ .str = "15-foot radius" } },
+                        &.{ .{ .str = "Dim" }, .{ .str = "Additional 30 feet" } },
+                    },
+                },
+                .heading = "Light",
+                .desc = null,
+            },
+            .{
+                .table = null,
+                .heading = "Fuel",
+                .desc = "One pint of oil burns for 6 hours.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1329,7 +1676,27 @@ pub const bullseye_lantern: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     null,
-    "Burns oil for about 6 hours and projects a long cone of bright and dim light.",
+    .{
+        .desc = "An oil-burning lantern that projects light forward.",
+        .desc_fields = &.{
+            .{
+                .table = .{
+                    .headings = &.{ "Light", "Distance" },
+                    .table_entry = &.{
+                        &.{ .{ .str = "Bright" }, .{ .str = "60-foot cone" } },
+                        &.{ .{ .str = "Dim" }, .{ .str = "Additional 60 feet" } },
+                    },
+                },
+                .heading = "Light",
+                .desc = null,
+            },
+            .{
+                .table = null,
+                .heading = "Fuel",
+                .desc = "One pint of oil burns for 6 hours.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1346,7 +1713,32 @@ pub const hooded_lantern: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     null,
-    "Burns oil for about 6 hours; its hood can reduce the light to a small dim area.",
+    .{
+        .desc = "An oil-burning lantern with an adjustable hood.",
+        .desc_fields = &.{
+            .{
+                .table = .{
+                    .headings = &.{ "Light", "Distance" },
+                    .table_entry = &.{
+                        &.{ .{ .str = "Bright" }, .{ .str = "30-foot radius" } },
+                        &.{ .{ .str = "Dim" }, .{ .str = "Additional 30 feet" } },
+                    },
+                },
+                .heading = "Light",
+                .desc = null,
+            },
+            .{
+                .table = null,
+                .heading = "Fuel",
+                .desc = "One pint of oil burns for 6 hours.",
+            },
+            .{
+                .table = null,
+                .heading = "Lower Hood",
+                .desc = "As an action, the hood can be lowered to reduce the light to dim light in a 5-foot radius.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1363,7 +1755,26 @@ pub const oil: Item = Item.compInit(
     .{ .currency = .silver, .count = 1 },
     null,
     null,
-    "A pint of lamp oil that can also be splashed, thrown, or poured and ignited.",
+    .{
+        .desc = "A pint of lamp oil, normally carried in a flask.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Splash or Throw",
+                .desc = "As an action, the oil can be splashed onto a creature within 5 feet or thrown up to 20 feet as an improvised ranged weapon attack. On a hit, the target is coated in oil.",
+            },
+            .{
+                .table = null,
+                .heading = "Ignited Target",
+                .desc = "If the coated target takes fire damage before the oil dries after 1 minute, it takes an additional 5 fire damage.",
+            },
+            .{
+                .table = null,
+                .heading = "Ground Use",
+                .desc = "A flask can cover a level 5-foot-square area. If ignited, it burns for 2 rounds and deals 5 fire damage to a creature that enters the area or ends its turn there, at most once per turn.",
+            },
+        },
+    },
     null,
     null,
     .{ .fluid = .{ .default_container = flask.hash, .weight = .{ .unit = .pound, .count = 1.0 } } },
@@ -1380,7 +1791,26 @@ pub const basic_poison: Item = Item.compInit(
     .{ .currency = .gold, .count = 100 },
     null,
     null,
-    "Can coat one slashing or piercing weapon or up to three pieces of ammunition for a short time.",
+    .{
+        .desc = "A vial of basic injury poison.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Application",
+                .desc = "Applying it takes an action and can coat one slashing or piercing weapon or up to three pieces of ammunition.",
+            },
+            .{
+                .table = null,
+                .heading = "Effect",
+                .desc = "A creature hit by the coated weapon or ammunition must succeed on a DC 10 Constitution saving throw or take 1d4 poison damage.",
+            },
+            .{
+                .table = null,
+                .heading = "Potency",
+                .desc = "Once applied, the poison remains potent for 1 minute before drying.",
+            },
+        },
+    },
     null,
     null,
     .{ .fluid = .{ .default_container = vial.hash, .weight = null } },
@@ -1397,7 +1827,16 @@ pub const potion_of_healing: Item = Item.compInit(
     .{ .currency = .gold, .count = 50 },
     .common,
     null,
-    "A common healing potion.",
+    .{
+        .desc = "A common red healing potion whose liquid glimmers when disturbed.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Effect",
+                .desc = "Drinking the potion restores 2d4 + 2 hit points.",
+            },
+        },
+    },
     null,
     null,
     .{ .potion = .{ .default_container = vial.hash, .weight = .{ .unit = .pound, .count = 0.5 } } },
@@ -1414,7 +1853,21 @@ pub const tinderbox: Item = Item.compInit(
     .{ .currency = .silver, .count = 5 },
     null,
     null,
-    "Contains flint, fire steel, and tinder for starting fires.",
+    .{
+        .desc = "A small container holding flint, fire steel, and tinder.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Exposed Fuel",
+                .desc = "Lighting a torch or another object with abundant exposed fuel takes an action.",
+            },
+            .{
+                .table = null,
+                .heading = "Other Fires",
+                .desc = "Lighting a less readily ignited fire takes about 1 minute.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1431,7 +1884,21 @@ pub const torch: Item = Item.compInit(
     .{ .currency = .copper, .count = 1 },
     null,
     null,
-    "Burns for about 1 hour, providing light; a burning torch can deal 1 fire damage as an improvised melee attack.",
+    .{
+        .desc = "A portable burning light source.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Light",
+                .desc = "Burns for 1 hour, shedding bright light in a 20-foot radius and dim light for another 20 feet.",
+            },
+            .{
+                .table = null,
+                .heading = "Weapon",
+                .desc = "A successful melee attack made with a burning torch deals 1 fire damage.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1524,7 +1991,7 @@ pub const travelers_clothes: Item = Item.compInit(
 );
 
 pub const arcane_crystal: Item = Item.compInit(
-    "Arcane Focus - Crystal",
+    "Crystal",
     .phb14,
     false,
     .{ .unit = .pound, .count = 1.0 },
@@ -1533,7 +2000,7 @@ pub const arcane_crystal: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     "Arcane spellcasting focus.",
-    null,
+    arcane_focus_desc,
     null,
     null,
     null,
@@ -1541,7 +2008,7 @@ pub const arcane_crystal: Item = Item.compInit(
 );
 
 pub const arcane_orb: Item = Item.compInit(
-    "Arcane Focus - Orb",
+    "Orb",
     .phb14,
     false,
     .{ .unit = .pound, .count = 3.0 },
@@ -1550,7 +2017,7 @@ pub const arcane_orb: Item = Item.compInit(
     .{ .currency = .gold, .count = 20 },
     null,
     "Arcane spellcasting focus.",
-    null,
+    arcane_focus_desc,
     null,
     null,
     null,
@@ -1558,7 +2025,7 @@ pub const arcane_orb: Item = Item.compInit(
 );
 
 pub const arcane_rod: Item = Item.compInit(
-    "Arcane Focus - Rod",
+    "Rod",
     .phb14,
     false,
     .{ .unit = .pound, .count = 2.0 },
@@ -1567,7 +2034,7 @@ pub const arcane_rod: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     "Arcane spellcasting focus.",
-    null,
+    arcane_focus_desc,
     null,
     null,
     null,
@@ -1575,7 +2042,7 @@ pub const arcane_rod: Item = Item.compInit(
 );
 
 pub const arcane_staff: Item = Item.compInit(
-    "Arcane Focus - Staff",
+    "Staff",
     .phb14,
     false,
     .{ .unit = .pound, .count = 4.0 },
@@ -1584,7 +2051,7 @@ pub const arcane_staff: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     "Arcane spellcasting focus.",
-    null,
+    arcane_focus_desc,
     null,
     null,
     null,
@@ -1592,7 +2059,7 @@ pub const arcane_staff: Item = Item.compInit(
 );
 
 pub const arcane_wand: Item = Item.compInit(
-    "Arcane Focus - Wand",
+    "Wand",
     .phb14,
     false,
     .{ .unit = .pound, .count = 1.0 },
@@ -1601,7 +2068,7 @@ pub const arcane_wand: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     "Arcane spellcasting focus.",
-    null,
+    arcane_focus_desc,
     null,
     null,
     null,
@@ -1618,7 +2085,7 @@ pub const sprig_of_mistletoe: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     "Druidic spellcasting focus.",
-    null,
+    druidic_focus_desc,
     null,
     null,
     null,
@@ -1635,7 +2102,7 @@ pub const druidic_totem: Item = Item.compInit(
     .{ .currency = .gold, .count = 1 },
     null,
     "Druidic spellcasting focus.",
-    null,
+    druidic_focus_desc,
     null,
     null,
     null,
@@ -1652,7 +2119,7 @@ pub const wooden_staff: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     "Druidic spellcasting focus.",
-    null,
+    druidic_focus_desc,
     null,
     null,
     null,
@@ -1669,7 +2136,7 @@ pub const yew_wand: Item = Item.compInit(
     .{ .currency = .gold, .count = 10 },
     null,
     "Druidic spellcasting focus.",
-    null,
+    druidic_focus_desc,
     null,
     null,
     null,
@@ -1686,7 +2153,7 @@ pub const holy_amulet: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     "Holy symbol suitable for use as a spellcasting focus.",
-    null,
+    holy_symbol_desc,
     null,
     null,
     null,
@@ -1703,7 +2170,7 @@ pub const holy_emblem: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     "Holy symbol suitable for use as a spellcasting focus.",
-    null,
+    holy_symbol_desc,
     null,
     null,
     null,
@@ -1720,7 +2187,7 @@ pub const holy_reliquary: Item = Item.compInit(
     .{ .currency = .gold, .count = 5 },
     null,
     "Holy symbol suitable for use as a spellcasting focus.",
-    null,
+    holy_symbol_desc,
     null,
     null,
     null,
@@ -1737,7 +2204,31 @@ pub const fargab: Item = Item.compInit(
     null,
     null,
     null,
-    "A paired, backpack-sized radio device capable of sending a short spoken message to its matched unit within 18 miles.",
+    .{
+        .desc = "A backpack-sized radio device manufactured as one half of a matched pair.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Transmit",
+                .desc = "While wearing it, a creature can use an action to send a spoken message of up to 25 words to the creature wearing the matched fargab.",
+            },
+            .{
+                .table = null,
+                .heading = "Range",
+                .desc = "The matched fargab must be within 18 miles.",
+            },
+            .{
+                .table = null,
+                .heading = "Speaker",
+                .desc = "The received message can be heard from the device's speakers up to 10 feet away.",
+            },
+            .{
+                .table = null,
+                .heading = "Unattended Device",
+                .desc = "If no creature is wearing the matched fargab, the receiving speakers emit static instead.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1754,7 +2245,26 @@ pub const narycrash: Item = Item.compInit(
     null,
     null,
     null,
-    "A backpack-sized balloon parachute that can slow a fall when deployed, with a chance of failing near the ground.",
+    .{
+        .desc = "A backpack-sized device containing a balloon-based parachute.",
+        .desc_fields = &.{
+            .{
+                .table = null,
+                .heading = "Deploy",
+                .desc = "When falling, the wearer can use a reaction to deploy the parachute.",
+            },
+            .{
+                .table = null,
+                .heading = "Descent",
+                .desc = "While deployed, the wearer descends 60 feet per round and takes no falling damage.",
+            },
+            .{
+                .table = null,
+                .heading = "Failure Near Ground",
+                .desc = "At 10 feet above the ground, roll a d20. On a 5 or lower, the parachute fails and the wearer resumes falling normally.",
+            },
+        },
+    },
     null,
     null,
     null,
@@ -1771,7 +2281,7 @@ pub const soap: Item = Item.compInit(
     null,
     null,
     null,
-    "Soap included in the Diplomat's Pack. The cited adventuring-gear page does not list a standalone price.",
+    .{ .desc = "Soap included in the Diplomat's Pack. The cited adventuring-gear page does not list a standalone price.", .desc_fields = null },
     null,
     null,
     null,

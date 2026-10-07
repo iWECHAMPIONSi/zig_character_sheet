@@ -16,6 +16,8 @@ const CubicVolumeValue = units.CubicVolumeValue;
 const DistanceValue = units.DistanceValue;
 const shop = @import("shop.zig");
 const ShopEntry = shop.ShopEntry;
+const description = @import("description.zig");
+const Description = description.Description;
 
 pub const MeleeWeapon = struct {
     weapon_category: enums.WeaponCategory,
@@ -185,9 +187,9 @@ pub const Item = struct {
     /// how rare it is (applies to magical items only)
     rarity: ?enums.Rarity,
     /// details
-    details: ?[]const u8,
+    brief: ?[]const u8,
     /// description
-    desc: ?[]const u8,
+    desc: Description,
     /// The dice rolls (look at modifier.zig for type)
     dice_rolls: ?[]modifier.DiceRoll,
     /// The modifiers (look at modifier.zig for type)
@@ -208,8 +210,8 @@ pub const Item = struct {
         comptime length: ?DistanceValue,
         comptime value: ?CurrencyValue,
         comptime rarity: ?enums.Rarity,
-        comptime details: ?[]const u8,
-        comptime desc: ?[]const u8,
+        comptime brief: ?[]const u8,
+        comptime desc: ?Description,
         comptime dice_rolls: ?[]modifier.DiceRoll,
         comptime modifiers: ?[]modifier.Modifier,
         comptime category: ?Category,
@@ -226,8 +228,8 @@ pub const Item = struct {
             .count = 1,
             .value = value,
             .rarity = rarity,
-            .details = details,
-            .desc = desc,
+            .brief = brief,
+            .desc = if (desc != null) desc.? else .{ .desc = null, .desc_fields = null },
             .dice_rolls = dice_rolls,
             .modifiers = modifiers,
             .category = category,
