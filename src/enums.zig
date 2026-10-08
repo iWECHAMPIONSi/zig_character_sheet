@@ -1,3 +1,7 @@
+const items = @import("items.zig");
+const Item = items.Item;
+const Spell = @import("spells.zig").Spell;
+
 // ================================== STATS =========================
 
 pub const Skill = enum {
@@ -19,14 +23,6 @@ pub const Skill = enum {
     sleight_of_hand,
     stealth,
     survival,
-};
-
-pub const Size = enum {
-    tiny,
-    small,
-    medium,
-    large,
-    huge,
 };
 
 pub const Ability = enum {
@@ -88,7 +84,65 @@ pub const PlayerStat = enum {
     temp_hit_points,
 };
 
+// ======================= CHARACTER ==========================
+
+pub const Scripts = enum {};
+
+pub const LanguageRarity = enum {
+    standard,
+    exotic,
+    rare,
+};
+
+pub const Languages = enum {};
+
+pub const Size = enum {
+    tiny,
+    small,
+    medium,
+    large,
+    huge,
+};
+
+pub const HashIdentity = union(enum) {
+    item: u64,
+    spell: u64,
+    language: u64,
+};
+
+pub const Proficiency = union(enum) {
+    hash: HashIdentity,
+    weapon_category: WeaponCategory,
+    armor_category: ArmorCategory,
+    skill: Skill,
+    ability_save: Ability,
+};
+
 // ======================== MODS ==========================
+
+/// This is effectivelly a way to allow for exotic homebrews
+pub const LogicOperators = enum {
+    @"and",
+    @"or",
+    not,
+    nand,
+    nor,
+    xor,
+};
+
+pub const CompareOperators = enum {
+    gt,
+    gte,
+    eq,
+    neq,
+    lte,
+    lt,
+};
+
+pub const Operators = union(enum) {
+    logic: LogicOperators,
+    compare: CompareOperators,
+};
 
 pub const Mod = union(enum) {
     ability_score: Ability,
@@ -140,6 +194,12 @@ pub const Bonus = enum {
 pub const DamageType = union(enum) {
     physical: PhysicalDamage,
     magical: MagicDamage,
+};
+
+pub const AttackType = enum {
+    melee,
+    ranged,
+    magic,
 };
 
 pub const WeaponCategory = enum {
@@ -388,6 +448,10 @@ pub const Source = enum {
     ps_ixalan,
     ps_dominaria,
 
+    // ======================================================
+    // This is when you know something has a source, but don't know the source (if it's a homebrew, then use .hb)
+    unknown,
+
     pub fn sourceName(self: Source) []const u8 {
         return switch (self) {
             // =================================================================
@@ -544,6 +608,10 @@ pub const Source = enum {
             .ps_amonkhet => "Plane Shift: Amonkhet",
             .ps_ixalan => "Plane Shift: Ixalan",
             .ps_dominaria => "Plane Shift: Dominaria",
+
+            // ============================================
+            // This is when you know something has a source, but don't know the source (if it's a homebrew, then use .hb)
+            .unknown => "Unknown",
         };
     }
 };

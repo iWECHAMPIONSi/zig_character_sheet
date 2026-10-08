@@ -18,6 +18,8 @@ const shop = @import("shop.zig");
 const ShopEntry = shop.ShopEntry;
 const description = @import("description.zig");
 const Description = description.Description;
+const AttackRoll = modifier.AttackRoll;
+const DamageRoll = modifier.DamageRoll;
 
 pub const MeleeWeapon = struct {
     weapon_category: enums.WeaponCategory,
@@ -36,6 +38,8 @@ pub const MeleeWeapon = struct {
         versatile: bool,
         versatile_dice: ?Roll,
     },
+    attack_rolls: ?[]const AttackRoll,
+    damage_rolls: ?[]const DamageRoll,
 };
 
 pub const RangedWeapon = struct {
@@ -57,6 +61,8 @@ pub const RangedWeapon = struct {
         versatile: bool,
         versatile_dice: ?Roll,
     },
+    attack_rolls: ?[]const AttackRoll,
+    damage_rolls: ?[]const DamageRoll,
 };
 
 pub const ArmorMod = struct {

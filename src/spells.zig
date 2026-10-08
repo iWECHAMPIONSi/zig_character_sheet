@@ -51,6 +51,8 @@ pub const Spell = struct {
     desc: Description,
     higher_levels: ?[]const modifier.ScalingLevel,
     classes: []const u64, // the actual classes will be implimented later, but for now we are only going to have a commented out portion that's going to be an array of u64 hashes
+    attack_rolls: ?[]const modifier.AttackRoll,
+    damage_rolls: ?[]const modifier.DamageRoll,
     dice_rolls: ?[]const modifier.DiceRoll,
     modifiers: ?[]const modifier.Modifier,
     const Self = @This();

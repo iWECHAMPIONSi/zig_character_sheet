@@ -4,12 +4,6 @@ const ArrayList = std.ArrayList;
 const errors = @import("errors.zig");
 const StdErr = errors.StdErr;
 
-const items = @import("items.zig");
-const Item = items.Item;
-
-const spells = @import("spells.zig");
-const Spell = spells.Spell;
-
 const Pair = struct {
     key: u64,
     value: []const u8,
@@ -20,7 +14,11 @@ const SearchResult = struct {
     index: usize,
 };
 
-pub const map_type = union(enum) { item: u64, spell: u64 };
+pub const map_type = union(enum) {
+    item: u64,
+    spell: u64,
+    language: u64,
+};
 
 pub const ArrayId = struct {
     list: ArrayList(Pair),
@@ -31,17 +29,23 @@ pub const HashMap = struct {
     map: struct {
         items: ArrayList(Pair),
         spells: ArrayList(Pair),
+        languages: ArrayList(Pair),
     },
 
     const Self = @This();
 
     pub fn init() Self {
-        return .{ .map = .{ .items = ArrayList(Pair).empty, .spells = ArrayList(Pair).empty } };
+        return .{ .map = .{
+            .items = ArrayList(Pair).empty,
+            .spells = ArrayList(Pair).empty,
+            .languages = ArrayList(Pair).empty,
+        } };
     }
 
     pub fn deinit(self: *Self, allocator: std.mem.Allocator) void {
         self.map.items.deinit(allocator);
         self.map.spells.deinit(allocator);
+        self.map.languages.deinit(allocator);
     }
 
     pub fn get(self: *const Self, key: map_type) ?[]const u8 {
@@ -54,6 +58,7 @@ pub const HashMap = struct {
         return switch (key) {
             .item => self.map.items.items[result.index].value,
             .spell => self.map.spells.items[result.index].value,
+            .language => self.map.languages.items[result.index].value,
         };
     }
 
@@ -70,6 +75,10 @@ pub const HashMap = struct {
             .spell => .{
                 .list = self.map.spells,
                 .id = key.spell,
+            },
+            .language => .{
+                .list = self.map.languages,
+                .id = key.language,
             },
         };
         const list: ArrayList(Pair) = data.list;
@@ -131,6 +140,18 @@ pub const HashMap = struct {
                     return StdErr.MemoryAllocationFailed;
                 };
             },
+            .language => {
+                self.map.languages.insert(
+                    allocator,
+                    result.index,
+                    .{
+                        .key = key.language,
+                        .value = value,
+                    },
+                ) catch {
+                    return StdErr.MemoryAllocationFailed;
+                };
+            },
         }
     }
 
@@ -144,6 +165,7 @@ pub const HashMap = struct {
         _ = switch (key) {
             .item => self.map.items.orderedRemove(result.index),
             .spell => self.map.spells.orderedRemove(result.index),
+            .language => self.map.languages.orderedRemove(result.index),
         };
         return true;
     }

@@ -195,7 +195,7 @@ pub const acid_splash: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Artificer, Sorcerer, Wizard
+    // Artificer, Sorcerer, Wizard
     &.{},
     &.{roll_1d6},
     null,
@@ -223,7 +223,7 @@ pub const blade_ward: Spell = Spell.compInit(
     "Gain brief resistance to weapon bludgeoning, piercing, and slashing damage.",
     .{ .desc = "Until the end of your next turn, weapon attacks deal half bludgeoning, piercing, and slashing damage to you.", .desc_fields = null },
     null,
-    // Classes: Bard, Sorcerer, Warlock, Wizard
+    // Bard, Sorcerer, Warlock, Wizard
     &.{},
     null,
     null,
@@ -284,7 +284,7 @@ pub const booming_blade: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Artificer
+    // Artificer
     &.{},
     &.{roll_1d8},
     null,
@@ -331,7 +331,7 @@ pub const chill_touch: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Sorcerer, Warlock, Wizard
+    // Sorcerer, Warlock, Wizard
     &.{},
     &.{roll_1d8},
     null,
@@ -388,7 +388,7 @@ pub const control_flames: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Druid, Sorcerer, Wizard
+    // Druid, Sorcerer, Wizard
     &.{},
     null,
     null,
@@ -435,7 +435,7 @@ pub const create_bonfire: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Artificer, Druid, Sorcerer, Warlock, Wizard
+    // Artificer, Druid, Sorcerer, Warlock, Wizard
     &.{},
     &.{roll_1d8},
     null,
@@ -477,7 +477,7 @@ pub const dancing_lights: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Artificer, Bard, Sorcerer, Wizard
+    // Artificer, Bard, Sorcerer, Wizard
     &.{},
     null,
     null,
@@ -529,7 +529,7 @@ pub const druidcraft: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Druid
+    // Druid
     &.{},
     null,
     null,
@@ -576,7 +576,7 @@ pub const eldritch_blast: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Warlock
+    // Warlock
     &.{},
     &.{roll_1d10},
     null,
@@ -623,7 +623,7 @@ pub const encode_thoughts: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: none (or only optional class-list entries on Wikidot)
+    // none (or only optional class-list entries on Wikidot)
     &.{},
     null,
     null,
@@ -670,7 +670,7 @@ pub const fire_bolt: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Artificer, Sorcerer, Wizard
+    // Artificer, Sorcerer, Wizard
     &.{},
     &.{roll_1d10},
     null,
@@ -698,7 +698,7 @@ pub const friends: Spell = Spell.compInit(
     "Gain advantage on Charisma checks against one nonhostile creature, which realizes the manipulation afterward.",
     .{ .desc = "Choose one creature that is not hostile toward you. For the duration, you have advantage on Charisma checks directed at it. When the spell ends, the creature realizes magic influenced its mood and may become hostile or seek retribution.", .desc_fields = null },
     null,
-    // Classes: Bard, Sorcerer, Warlock, Wizard
+    // Bard, Sorcerer, Warlock, Wizard
     &.{},
     null,
     null,
@@ -745,7 +745,7 @@ pub const frostbite: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Druid, Sorcerer, Warlock, Wizard, Artificer
+    // Druid, Sorcerer, Warlock, Wizard, Artificer
     &.{},
     &.{roll_1d6},
     null,
@@ -806,7 +806,7 @@ pub const green_flame_blade: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Artificer
+    // Artificer
     &.{},
     &.{roll_spell_mod},
     null,
@@ -834,7 +834,7 @@ pub const guidance: Spell = Spell.compInit(
     "A willing creature can add 1d4 to one ability check before the spell ends.",
     .{ .desc = "Touch one willing creature. Once before the spell ends, it can roll a d4 and add the result to one ability check, choosing to roll before or after the check. The spell then ends.", .desc_fields = null },
     null,
-    // Classes: Artificer, Cleric, Druid
+    // Artificer, Cleric, Druid
     &.{},
     &.{roll_1d4},
     null,
@@ -881,7 +881,7 @@ pub const gust: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Druid, Sorcerer, Wizard
+    // Druid, Sorcerer, Wizard
     &.{},
     null,
     null,
@@ -945,7 +945,7 @@ pub const infestation: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Druid, Sorcerer, Warlock, Wizard
+    // Druid, Sorcerer, Warlock, Wizard
     &.{},
     &.{ roll_1d6, roll_1d4 },
     null,
@@ -987,7 +987,7 @@ pub const light: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Artificer, Bard, Cleric, Sorcerer, Wizard
+    // Artificer, Bard, Cleric, Sorcerer, Wizard
     &.{},
     null,
     null,
@@ -1034,7 +1034,7 @@ pub const lightning_lure: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Artificer
+    // Artificer
     &.{},
     &.{roll_1d8},
     null,
@@ -1076,7 +1076,7 @@ pub const mage_hand: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Artificer, Bard, Sorcerer, Warlock, Wizard
+    // Artificer, Bard, Sorcerer, Warlock, Wizard
     &.{},
     null,
     null,
@@ -1123,7 +1123,7 @@ pub const magic_stone: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Druid, Warlock, Artificer
+    // Druid, Warlock, Artificer
     &.{},
     &.{roll_1d6_spell_mod},
     null,
@@ -1165,7 +1165,7 @@ pub const mending: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Artificer, Bard, Cleric, Druid, Sorcerer, Wizard
+    // Artificer, Bard, Cleric, Druid, Sorcerer, Wizard
     &.{},
     null,
     null,
@@ -1207,7 +1207,7 @@ pub const message: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Artificer, Bard, Sorcerer, Wizard
+    // Artificer, Bard, Sorcerer, Wizard
     &.{},
     null,
     null,
@@ -1254,7 +1254,7 @@ pub const mind_sliver: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: none (or only optional class-list entries on Wikidot)
+    // none (or only optional class-list entries on Wikidot)
     &.{},
     &.{ roll_1d6, roll_negative_1d4 },
     null,
@@ -1301,7 +1301,7 @@ pub const minor_illusion: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Bard, Sorcerer, Warlock, Wizard
+    // Bard, Sorcerer, Warlock, Wizard
     &.{},
     null,
     null,
@@ -1353,7 +1353,7 @@ pub const mold_earth: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Druid, Sorcerer, Wizard
+    // Druid, Sorcerer, Wizard
     &.{},
     null,
     null,
@@ -1400,7 +1400,7 @@ pub const poison_spray: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Artificer, Druid, Sorcerer, Warlock, Wizard
+    // Artificer, Druid, Sorcerer, Warlock, Wizard
     &.{},
     &.{roll_1d12},
     null,
@@ -1467,7 +1467,7 @@ pub const prestidigitation: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Artificer, Bard, Sorcerer, Warlock, Wizard
+    // Artificer, Bard, Sorcerer, Warlock, Wizard
     &.{},
     null,
     null,
@@ -1514,7 +1514,7 @@ pub const primal_savagery: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Druid
+    // Druid
     &.{},
     &.{roll_1d10},
     null,
@@ -1575,7 +1575,7 @@ pub const produce_flame: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Druid
+    // Druid
     &.{},
     &.{roll_1d8},
     null,
@@ -1622,7 +1622,7 @@ pub const ray_of_frost: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Artificer, Sorcerer, Wizard
+    // Artificer, Sorcerer, Wizard
     &.{},
     &.{roll_1d8},
     null,
@@ -1650,7 +1650,7 @@ pub const resistance: Spell = Spell.compInit(
     "A willing creature can add 1d4 to one saving throw before the spell ends.",
     .{ .desc = "Touch one willing creature. Once before the spell ends, it can roll a d4 and add the result to one saving throw, choosing to roll before or after the save. The spell then ends.", .desc_fields = null },
     null,
-    // Classes: Artificer, Cleric, Druid
+    // Artificer, Cleric, Druid
     &.{},
     &.{roll_1d4},
     null,
@@ -1697,7 +1697,7 @@ pub const sacred_flame: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Cleric
+    // Cleric
     &.{},
     &.{roll_1d8},
     null,
@@ -1754,7 +1754,7 @@ pub const shape_water: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Druid, Sorcerer, Wizard
+    // Druid, Sorcerer, Wizard
     &.{},
     null,
     null,
@@ -1782,7 +1782,7 @@ pub const shillelagh: Spell = Spell.compInit(
     "Empower a held club or quarterstaff with a d8 damage die and your spellcasting ability.",
     .{ .desc = "Imbue a club or quarterstaff you are holding. You can use your spellcasting ability instead of Strength for its melee attack and damage rolls, its damage die becomes a d8, and it counts as magical. The spell ends if you cast it again or release the weapon.", .desc_fields = null },
     null,
-    // Classes: Druid
+    // Druid
     &.{},
     &.{roll_1d8_spell_mod},
     null,
@@ -1829,7 +1829,7 @@ pub const shocking_grasp: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Artificer, Sorcerer, Wizard
+    // Artificer, Sorcerer, Wizard
     &.{},
     &.{roll_1d8},
     null,
@@ -1857,7 +1857,7 @@ pub const spare_the_dying: Spell = Spell.compInit(
     "Stabilize a living creature at 0 hit points.",
     .{ .desc = "Touch a living creature at 0 hit points and stabilize it. The spell does not affect undead or constructs.", .desc_fields = null },
     null,
-    // Classes: Artificer, Cleric
+    // Artificer, Cleric
     &.{},
     null,
     null,
@@ -1904,7 +1904,7 @@ pub const sword_burst: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Artificer
+    // Artificer
     &.{},
     &.{roll_1d6},
     null,
@@ -1971,7 +1971,7 @@ pub const thaumaturgy: Spell = Spell.compInit(
         },
     },
     null,
-    // Classes: Cleric
+    // Cleric
     &.{},
     null,
     null,
@@ -2018,7 +2018,7 @@ pub const thorn_whip: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Artificer, Druid
+    // Artificer, Druid
     &.{},
     &.{roll_1d6},
     null,
@@ -2065,7 +2065,7 @@ pub const thunderclap: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Bard, Druid, Sorcerer, Warlock, Wizard, Artificer
+    // Bard, Druid, Sorcerer, Warlock, Wizard, Artificer
     &.{},
     &.{roll_1d6},
     null,
@@ -2127,7 +2127,7 @@ pub const toll_the_dead: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Cleric, Warlock, Wizard
+    // Cleric, Warlock, Wizard
     &.{},
     &.{ roll_1d8, roll_1d12 },
     null,
@@ -2155,7 +2155,7 @@ pub const true_strike: Spell = Spell.compInit(
     "Gain advantage on your first attack against the chosen target on your next turn.",
     .{ .desc = "Choose a target within range and briefly study its defenses. On your next turn, you have advantage on your first attack roll against that target if the spell is still active.", .desc_fields = null },
     null,
-    // Classes: Bard, Sorcerer, Warlock, Wizard
+    // Bard, Sorcerer, Warlock, Wizard
     &.{},
     null,
     null,
@@ -2202,7 +2202,7 @@ pub const vicious_mockery: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Bard
+    // Bard
     &.{},
     &.{roll_1d4},
     null,
@@ -2249,7 +2249,7 @@ pub const word_of_radiance: Spell = Spell.compInit(
             .modifiers = null,
         },
     },
-    // Classes: Cleric
+    // Cleric
     &.{},
     &.{roll_1d6},
     null,
